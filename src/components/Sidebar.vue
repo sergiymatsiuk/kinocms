@@ -208,6 +208,7 @@
 
 export default {
   data: () => ({
+    name: 'Sergiy'
   })
 }
 </script>
