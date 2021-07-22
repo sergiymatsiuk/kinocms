@@ -20,6 +20,11 @@ const routes = [
     component: () => import('../views/Films.vue')
   },
   {
+    path: '/films/films-pages',
+    name: 'FilmsPage',
+    component: () => import('../views/FilmsPage.vue')
+  },
+  {
     path: '/mailing',
     name: 'Mailing',
     component: () => import('../views/Mailing.vue')
@@ -48,11 +53,6 @@ const routes = [
     path: '/users',
     name: 'Users',
     component: () => import('../views/Users.vue')
-  },
-  {
-    path: '/films/films-pages',
-    name: 'FilmsPage',
-    component: () => import('../views/FilmsPage.vue')
   }
 ]
 

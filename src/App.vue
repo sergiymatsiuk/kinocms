@@ -25,10 +25,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .content-wrapper {
-    background-color: white;
-  }
-
+<style lang="scss" scoped>
   @import '~admin-lte/dist/css/adminlte.min.css';
 </style>
