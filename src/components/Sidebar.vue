@@ -215,6 +215,6 @@ export default {
 
 <style lang="scss">
   aside.main-sidebar.main-sidebar-custom.sidebar-dark-primary.elevation-4{
-    min-height: 100vh;
+    min-height: 100%;
   }
 </style>

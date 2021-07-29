@@ -1,3 +1,3 @@
 <template>
-    <h2>Mailing</h2>
+  <div class=""></div>
 </template>
