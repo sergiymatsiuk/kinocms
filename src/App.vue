@@ -11,8 +11,10 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Sidebar from '@/components/Sidebar'
 import Navbar from '@/components/Navbar'
+import Loader from '@/components/Loader'
 
 export default {
   data () {
@@ -20,7 +22,7 @@ export default {
     }
   },
   components: {
-    Sidebar, Navbar
+    Sidebar, Navbar, Loader
   }
 }
 </script>

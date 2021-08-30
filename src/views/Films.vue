@@ -1,86 +1,93 @@
 <template>
-  <div>
-    <div>
-      <h1>Upload a photo</h1>
-    </div>
-    <div>
-      <div>
-        <button @click="click1">choose photo</button>
-        <input
-          type="file"
-          ref="input1"
-          style="display: none"
-          @change="previewImage"
-          accept="image/*"
+  <div class="card card-info">
+    <div class="d-flex justify-content-between flex-column">
+      <div class="align-self-center mb-3 mt-3">
+        <h2>Список фильмов текущих</h2>
+      </div>
+      <Loader v-if="loader" class="mb-5"/>
+      <p class="mt-5 mb-5 align-self-center" v-else-if="films.length === 0">Фильмов пока нет!</p>
+      <div class="d-flex flex-wrap justify-content-center" v-else>
+        <CardFilms
+          v-for="film in films"
+          :key="film.id"
+          :card="film"
+          @changeFilms="loadNewFilms"
         />
       </div>
-      <div v-if="imageData != null">
-        <img class="preview" height="250" width=auto :src="img1" />
-        <br />
+      <div class="align-self-center mb-3 mt-3">
+        <button type="submit" class="btn btn-info col" style="width: 300px" @click="addNewFilm">Добавить фильм</button>
       </div>
     </div>
-    <div>
-        <textarea v-model="caption" label="Caption goes here"> </textarea>
-    </div>
-    <div>
-      <button color="pink" @click="create">upload</button>
+    <div class="d-flex justify-content-between flex-column">
+      <div class="align-self-center mb-3 mt-3">
+        <h2>Список фильмов которые покажут скоро</h2>
+      </div>
+      <Loader v-if="loader" class="mb-5"/>
+      <p class="mt-5 mb-5 align-self-center" v-else-if="soonFilms.length === 0">Фильмов пока нет!</p>
+      <div class="d-flex flex-wrap justify-content-center" v-else>
+        <CardFilms
+          v-for="film in soonFilms"
+          :key="film.id"
+          :card="film"
+          @changeFilms="loadNewFilms"
+        />
+      </div>
+      <div class="align-self-center mb-3 mt-3">
+        <button type="submit" class="btn btn-info col" style="width: 300px" @click="addNewFilm">Добавить фильм</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-import { fs, rtdb } from '../main'
+import CardFilms from '@/components/CardFilms'
+import Loader from '@/components/Loader'
+
 
 export default {
+  components: {
+    CardFilms, Loader
+  },
 
   data () {
     return {
-      caption : '',
-      img1: '',
-      imageData: null
+      title: 'Films',
+      films: [],
+      soonFilms: [],
+      loader: true,
+      id: 0
     }
   },
+
   methods: {
-    create () {
-      const post = {
-        photo: this.img1,
-        caption: this.caption        
-      }
-      rtdb.ref('PhotoGallery').push(post)
-      .then((response) => {
-        console.log(response)
+    addNewFilm () {
+      this.$router.push({ path: '/films-pages/' + this.id})
+    },
+
+    async loadNewFilms () {
+      this.loader = true
+      this.films = []
+      this.soonFilms = []
+      const newFilms = await this.$store.dispatch('fetchInfo', this.title)
+      newFilms.forEach(el => {
+        el.lang === 'UA' ?
+          el.UA.soon ? this.soonFilms.push(el.UA) : this.films.push(el.UA) :
+          el.RU.soon ? this.soonFilms.push(el.RU) : this.films.push(el.RU)
       })
-      .catch(err => {
-        console.log(err)
-      })
-    },
+      this.loader = false
+    }
+  },
 
-    click1() {
-      this.$refs.input1.click()   
-    },
-
-    previewImage(event) {
-      this.uploadValue=0;
-      this.img1=null;
-      this.imageData = event.target.files[0];
-      this.onUpload()
-    },
-
-    onUpload(){
-      this.img1=null;
-      const storageRef=fs.ref(`${this.imageData.name}`).put(this.imageData);
-      storageRef.on(`state_changed`,snapshot=>{
-      this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-        }, error=>{console.log(error.message)},
-      ()=>{this.uploadValue=100;
-        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
-            this.img1 =url;
-            console.log(this.img1)
-          });
-        }
-      );
-    },
+  async mounted () {
+    this.id = await this.$store.dispatch('getCounter')
+    const filmsFromDatabase = await this.$store.dispatch('fetchInfo', this.title)
+    filmsFromDatabase.forEach(el => {
+      el.lang === 'UA' ?
+        el.UA.soon ? this.soonFilms.push({ ...el.UA, id: el.id }) : this.films.push({ ...el.UA, id: el.id }) :
+        el.RU.soon ? this.soonFilms.push({ ...el.RU, id: el.id }) : this.films.push({ ...el.RU, id: el.id })
+    })
+    this.loader = false
   }
 };
 </script>

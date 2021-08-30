@@ -36,17 +36,8 @@
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Фильмы
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ml-2">
-                <router-link to="/films/films-pages" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Страница фильма</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
@@ -78,35 +69,17 @@
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Новости
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ml-2">
-                <router-link to="/news:id" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Страница новости</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
-            <router-link to="/shares" class="nav-link">
+            <router-link to="/action" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Акции
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ml-2">
-                <router-link to="/films:id" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Страница акции</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
@@ -114,70 +87,16 @@
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Страницы
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                <i class="far fa-circle nav-icon"></i>
-                  <p>Главная страница</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>О кинотеатре</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Кафе-Бар</p>
-                </router-link>
-              </li>
-                            <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                <i class="far fa-circle nav-icon"></i>
-                  <p>Vip-зал</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Реклама</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Детская комната</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pages:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Контакты</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <router-link to="/users" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Пользователи
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link to="/films:id" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ред. пользователя</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">

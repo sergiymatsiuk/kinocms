@@ -4,25 +4,18 @@
     <form class="form-horizontal"  v-else>
       <div class="card-body">
         <div class="form-group d-flex flex-row-reverse">
-          <div>
-            <button
-              type="submit"
-              name="ukr"
-              class="btn btn-lang"
-              @click.prevent="changeLang(true)"
-              :class="{ 'btn-info' : lang==='UA' }"
-            >Українська</button>
-            <button type="submit" name="ru" class="btn" @click.prevent="changeLang(false)" :class="{ 'btn-info' : lang==='RU' }">Русский</button>
-          </div>
-          <div class="custom-control custom-switch d-flex align-items-center">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="page.active">
-            <label class="custom-control-label" for="customSwitch1">ВКЛ</label>
-          </div>
+          <button
+            type="submit"
+            name="ukr"
+            class="btn btn-lang"
+            @click.prevent="changeLang(true)"
+            :class="{ 'btn-info' : lang==='UA' }"
+          >Українська</button>
+          <button type="submit" name="ru" class="btn" @click.prevent="changeLang(false)" :class="{ 'btn-info' : lang==='RU' }">Русский</button>
         </div>
         <div class="form-group row">
-          <div class="col-6 row">
-            <label for="inputEmail3" class="col-4 col-form-label"><h6>{{ 'NameFilms' | localize }}</h6></label>
-            <div class="col-8">
+            <label for="inputEmail3" class="col-2 col-form-label"><h6>{{ 'NameCinemas' | localize }}</h6></label>
+            <div class="col-10">
               <input
                 type="text"
                 class="form-control"
@@ -30,13 +23,6 @@
                 placeholder="Название акции"
                 v-model="page.name"
               />
-            </div>
-          </div>
-          <div class="form-group col-6 row">
-            <label class="col-4 col-form-label"><h6>{{'Date' | localize}}</h6></label>
-            <div class="input-group date col-8">
-                <input type="date" class="form-control datetimepicker-input" v-model="page.date"/>
-            </div>
           </div>
         </div>
         <div class="form-group row">
@@ -52,8 +38,20 @@
           </div>
         </div>
         <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label"><h6>{{'Conditions' | localize}}</h6></label>
+          <div class="col-sm-10">
+            <textarea
+              type="text"
+              class="form-control"
+              id="input"
+              placeholder="Текст"
+              v-model="page.conditions"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
             <div class="col-3">
-                <h6>{{'MainImg' | localize}}</h6>
+                <h6>{{'LogoImg' | localize}}</h6>
             </div>
             <div class="col-6 row">
               <div class=" d-flex ">
@@ -78,6 +76,33 @@
               </div>
             </div>
         </div>
+        <div class="form-group row">
+          <div class="col-3">
+              <h6>{{'BannerImg' | localize}}</h6>
+          </div>
+          <div class="col-6 row">
+            <div class=" d-flex ">
+              <button class="btn-select" @click.prevent="selectBannerImg">
+              <div v-if="localBannerImg.length > 1">
+                <img class="preview" height="100" width=200 :src="localBannerImg" />
+              </div>
+              <div v-else style="height: 100px; width: 200px">
+                <img src="https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg"
+                  style="height: 100px; width: 200px">
+              </div>
+              </button>
+              <input
+                type="file"
+                ref="inputBanner"
+                style="display: none"
+                @change="saveBannerImg"
+                accept="image/*"
+                required
+              />
+              <button class="btn-lg btn-info align-self-center" @click.prevent="deleteBannerImg">{{'Delete' | localize}}</button>
+            </div>
+          </div>
+        </div>
         <div class="form-group column">
           <div class="">
               <h6>{{'OtherImg' | localize}}</h6>
@@ -95,46 +120,14 @@
             />
           </div>
         </div>
-        <div class="form-group row">
-          <label for="inputURLyoutube" class="col-sm-3 col-form-label"><h6>{{'LinkYoutube' | localize}}</h6></label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              class="form-control"
-              id="inputURLyoutube"
-              placeholder="Ссылка на видео в youtube"
-              v-model="page.URLyoutube"
-            />
+        <div class="d-flex justify-content-between flex-column mb-4">
+          <div class="d-flex justify-content-center mt-3">
+            <h4>{{'ListHalls' | localize}}</h4>
           </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-2">
-            <h6>{{'TypeFilms' | localize}}</h6>
-          </div>
-          <div class="col-sm-10">
-            <div class="form-group row">
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="3d" value="3d" v-model="page.type.d3">
-                <label class="form-check-label">3D</label>
-              </div>
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="2d" value="2d" v-model="page.type.d2">
-                <label class="form-check-label">2D</label>
-              </div>
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="imax" value="imax" v-model="page.type.imax">
-                <label class="form-check-label">IMAX</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-2">
-            <h6>{{'SoonFilms' | localize}}</h6>
-          </div>
-          <div class="form-check pr-5">
-            <input class="form-check-input" type="checkbox" name="soon" v-model="page.soon">
-            <label class="form-check-label">Да</label>
+          <TableInfoCinemas v-if="!page.halls"/>
+          <p class="no-halls" v-else>{{'NoHalls' | localize}}</p>
+          <div class="align-self-center mt-3">
+            <button type="submit" class="btn btn-info col" style="width: 300px" @click="addNewHall">{{'CreateHall' | localize}}</button>
           </div>
         </div>
         <div class="form-group row">
@@ -194,7 +187,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addFilm">{{'Save' | localize}}</button>
+        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addCinema">{{'Save' | localize}}</button>
         <button type="submit" class="btn btn-default col-sm-6" @click.prevent="deleteAll">
           {{'DeleteForm' | localize}}
         </button>
@@ -205,90 +198,74 @@
 
 <script>
 /* eslint-disable */
-import firebase from 'firebase/app'
-import CardShowImg from '@/components/CardShowImg'
+import Module from '@/module/module'
 import Loader from '@/components/Loader'
+import CardShowImg from '@/components/CardShowImg'
+import TableInfoCinemas from '@/components/TableInfoCinemas'
+
 
 export default {
-  components: {
-    CardShowImg, Loader
-  },
   data () {
     return {
+      title: 'Cinemas',
+      loading: true,
+      id: 0,
+      lang: 'UA',
+      locale: true,
+
       page: {
         locale: true,
-        active: true,
-        date: '',
         name: '',
         description: '',
+        conditions: '',
         mainImg: '',
+        bannerImg: '',
         localImgArr: [],
-        URLyoutube: '',
+        halls: [],
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
       ru: {
         locale: false,
-        active: true,
-        date: '',
         name: '',
         description: '',
+        conditions: '',
         mainImg: '',
+        bannerImg: '',
         localImgArr: [],
-        URLyoutube: '',
+        halls: [],
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
       ua: {
         locale: true,
-        active: true,
-        date: '',
         name: '',
         description: '',
+        conditions: '',
         mainImg: '',
+        bannerImg: '',
         localImgArr: [],
-        URLyoutube: '',
+        halls: [],
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
-
-      lang: 'UA',
-      loading: true,
-      id: 0,
-      locale: true,
 
       mainImageData: null,
       localMainImg: '',
+      bannerImageData: null,
+      localBannerImg: '',
       localImg: [
         {img: 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg', id: 0},
         {img: 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg', id: 1},
@@ -298,15 +275,18 @@ export default {
       ]
     }
   },
+  components: {
+    Loader, CardShowImg, TableInfoCinemas
+  },
   methods: {
-    // зміна мови
-    changeLang (key) {
+    changeLang(key) {
       this.locale = key
       this.$store.dispatch('changeLocale', this.locale ? 'ukr-UKR' : 'rus-RUS')
       if (key) {
         this.page = this.ua
         this.lang = 'UA'
         this.localMainImg = this.ua.mainImg
+        this.localBannerImg = this.ua.bannerImg
         if (this.ua.localImgArr !== undefined && this.ua.localImgArr.length !== 0) {
           this.clearLocalImg()
           for (let i = 0; i < this.ua.localImgArr.length; i++) {
@@ -319,6 +299,7 @@ export default {
         this.page = this.ru
         this.lang = 'RU'
         this.localMainImg = this.ru.mainImg
+        this.localBannerImg = this.ru.bannerImg
         if (this.ru.localImgArr !== undefined && this.ru.localImgArr.length !== 0) {
           this.clearLocalImg()
           for (let i = 0; i < this.ru.localImgArr.length; i++) {
@@ -327,6 +308,11 @@ export default {
         } else {
           this.clearLocalImg()
         }
+      }
+    },
+    clearLocalImg() {
+      for (let i=0; i<this.localImg.length; i++){
+        this.localImg[i].img = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
       }
     },
     // основне фото
@@ -341,66 +327,58 @@ export default {
     deleteLocalImg() {
       this.mainImageData = null,
       this.localMainImg = ''
-      this.page.mainImg = ''
+      this.mainImg = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
+    },
+    // баннер фото
+    selectBannerImg() {
+      this.$refs.inputBanner.click()
+    },
+    saveBannerImg(event) {
+      this.bannerImg=null;
+      this.bannerImageData = event.target.files[0];
+      this.localBannerImg = window.URL.createObjectURL(event.target.files[0]);
+    },
+    deleteBannerImg() {
+      this.bannerImageData = null,
+      this.localBannerImg = ''
+      this.bannerImg = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
     },
 
-    // додаткові фото
     changeLocalImg(card) {
       this.localImg[card.id] = card
     },
-    clearLocalImg() {
-      for (let i=0; i<this.localImg.length; i++){
-        this.localImg[i].img = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
-      }
+
+    addNewHall () {
+      this.$router.push('/cinemas-hall/' + this.id)
     },
 
-    async addInfoFilm (item, lang, id) {
+    async addCinema () {
+      console.log(this.page)
+      console.log(this.localImg)
+      console.log(this.mainImageData)
       try {
-        await firebase.database().ref(`/Films/${id}/${lang}`).set(item)
-        await firebase.database().ref(`/Films/${id}/lang`).set(lang)
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
+        this.loading = true
 
-    async addImg (title, lang, img, id, name) {
-      try {
-        return await firebase.storage().ref(`${title}/${id}/${lang}/${name}`).put(img).then(
-          async (snapshot) => {
-            return await snapshot.ref.getDownloadURL();
-          }
-        )
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
-
-    async addOtherImg (title, lang, imgs, id) {
-      try {
-        const temImg = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
-        let localImgArr = []
-        for (let i = 0; i < imgs.length; i++) {
-          if (imgs[i].img != temImg) {
-            if ( !imgs[i].imgData) {
-              localImgArr.push(imgs[i].img) 
-            } else {
-              const link = await firebase.storage().ref(`${title}/${id}/${lang}/other/${i}`).put(imgs[i].imgData).then(
-                async (snapshot) => {
-                  let linkItem =  await snapshot.ref.getDownloadURL();
-                  console.log(linkItem)
-                  localImgArr.push(linkItem)
-                }
-              )
-            }
-          }
+        if (this.mainImageData) {
+          this.page.mainImg = await Module.addImg (this.title, this.lang, this.mainImageData, this.id, 'main')
         }
-        console.log(title, imgs)
-        return localImgArr
+
+        if (this.bannerImageData) {
+          this.page.mainImg = await Module.addImg (this.title, this.lang, this.bannerImageData, this.id, 'banner')
+        }
+
+        this.page.localImgArr = await Module.addOtherImg(this.title, this.lang, this.localImg, this.id)
+        console.log(this.page.localImgArr)
+        
+        await Module.addInfoById (this.title, this.page, this.lang, this.id)
+
+        await Module.addCounter()
+
+        this.loading = false
+
+        this.$router.push({ path: '/cinemas'})
       } catch (e) {
-        commit('setError', e)
-        throw e
+        console.log(e)
       }
     },
 
@@ -443,26 +421,6 @@ export default {
         }
       }
     },
-
-    async addFilm () {
-      try {
-        this.loading = true
-
-        if (this.mainImageData) {
-          this.page.mainImg = await this.addImg( 'Films', this.lang, this.mainImageData, this.id, 'main')
-        }
-
-        this.page.localImgArr = await this.addOtherImg( 'Films', this.lang, this.localImg, this.id )
-
-        await this.addInfoFilm (this.page, this.lang, this.id)
-
-        await this.$store.dispatch('addCounter')
-
-        this.loading = false
-
-        this.$router.push({path: '/films'})
-      } catch (e) {}
-    }, 
   },
   async mounted () {
     this.id  = this.$route.params.id
@@ -470,7 +428,7 @@ export default {
 
     await this.check(this.id, counter)
 
-    this.loading = false
+    this.loading = false     
   }
 }
 </script>
@@ -491,5 +449,8 @@ export default {
   .btn-lang {
     margin-right: 10px;
     margin-left: 50px;
+  }
+  .no-halls {
+    margin: 0 auto;
   }
 </style>

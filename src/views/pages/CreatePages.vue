@@ -21,13 +21,13 @@
         </div>
         <div class="form-group row">
           <div class="col-6 row">
-            <label for="inputEmail3" class="col-4 col-form-label"><h6>{{ 'NameFilms' | localize }}</h6></label>
+            <label for="inputEmail3" class="col-4 col-form-label"><h6>{{ 'Name' | localize }}</h6></label>
             <div class="col-8">
               <input
                 type="text"
                 class="form-control"
                 id="inputEmail3"
-                placeholder="Название акции"
+                placeholder="Название"
                 v-model="page.name"
               />
             </div>
@@ -96,53 +96,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputURLyoutube" class="col-sm-3 col-form-label"><h6>{{'LinkYoutube' | localize}}</h6></label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              class="form-control"
-              id="inputURLyoutube"
-              placeholder="Ссылка на видео в youtube"
-              v-model="page.URLyoutube"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-2">
-            <h6>{{'TypeFilms' | localize}}</h6>
-          </div>
-          <div class="col-sm-10">
-            <div class="form-group row">
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="3d" value="3d" v-model="page.type.d3">
-                <label class="form-check-label">3D</label>
-              </div>
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="2d" value="2d" v-model="page.type.d2">
-                <label class="form-check-label">2D</label>
-              </div>
-              <div class="form-check pr-5">
-                <input class="form-check-input" type="checkbox" name="imax" value="imax" v-model="page.type.imax">
-                <label class="form-check-label">IMAX</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-2">
-            <h6>{{'SoonFilms' | localize}}</h6>
-          </div>
-          <div class="form-check pr-5">
-            <input class="form-check-input" type="checkbox" name="soon" v-model="page.soon">
-            <label class="form-check-label">Да</label>
-          </div>
-        </div>
-        <div class="form-group row">
           <div class="col-sm-2">
             <h6>{{'SEO' | localize}}</h6>
           </div>
           <div class="form-group row col-sm-10">
-
             <label for="inputURL" class="col-sm-2 col-form-label"
               >{{'SeoURL' | localize}}</label>
             <div class="col-sm-10">
@@ -194,7 +151,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addFilm">{{'Save' | localize}}</button>
+        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addPages">{{'Save' | localize}}</button>
         <button type="submit" class="btn btn-default col-sm-6" @click.prevent="deleteAll">
           {{'DeleteForm' | localize}}
         </button>
@@ -205,9 +162,9 @@
 
 <script>
 /* eslint-disable */
-import firebase from 'firebase/app'
 import CardShowImg from '@/components/CardShowImg'
 import Loader from '@/components/Loader'
+import Module from '@/module/module'
 
 export default {
   components: {
@@ -218,73 +175,52 @@ export default {
       page: {
         locale: true,
         active: true,
-        date: '',
         name: '',
+        date: '',
         description: '',
         mainImg: '',
         localImgArr: [],
-        URLyoutube: '',
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
       ru: {
         locale: false,
         active: true,
-        date: '',
         name: '',
+        date: '',
         description: '',
         mainImg: '',
         localImgArr: [],
-        URLyoutube: '',
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
       ua: {
         locale: true,
         active: true,
-        date: '',
         name: '',
+        date: '',
         description: '',
         mainImg: '',
         localImgArr: [],
-        URLyoutube: '',
         SEO: {
           SEOurl: '',
           SEOtitle: '',
           SEOkeywords: '',
           SEOdescription: ''
-        },
-        type: {
-          d3: false,
-          d2: false,
-          imax: false
-        },
-        soon: false
+        }
       },
 
-      lang: 'UA',
       loading: true,
       id: 0,
+      lang: 'UA',
       locale: true,
 
       mainImageData: null,
@@ -329,6 +265,12 @@ export default {
         }
       }
     },
+    clearLocalImg() {
+      for (let i=0; i<this.localImg.length; i++){
+        this.localImg[i].img = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
+      }
+    },
+
     // основне фото
     selectLocalImg() {
       this.$refs.input1.click()
@@ -344,129 +286,72 @@ export default {
       this.page.mainImg = ''
     },
 
-    // додаткові фото
+    // Додаткові фото
     changeLocalImg(card) {
       this.localImg[card.id] = card
     },
-    clearLocalImg() {
-      for (let i=0; i<this.localImg.length; i++){
-        this.localImg[i].img = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
-      }
-    },
 
-    async addInfoFilm (item, lang, id) {
-      try {
-        await firebase.database().ref(`/Films/${id}/${lang}`).set(item)
-        await firebase.database().ref(`/Films/${id}/lang`).set(lang)
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
-
-    async addImg (title, lang, img, id, name) {
-      try {
-        return await firebase.storage().ref(`${title}/${id}/${lang}/${name}`).put(img).then(
-          async (snapshot) => {
-            return await snapshot.ref.getDownloadURL();
-          }
-        )
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
-
-    async addOtherImg (title, lang, imgs, id) {
-      try {
-        const temImg = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
-        let localImgArr = []
-        for (let i = 0; i < imgs.length; i++) {
-          if (imgs[i].img != temImg) {
-            if ( !imgs[i].imgData) {
-              localImgArr.push(imgs[i].img) 
-            } else {
-              const link = await firebase.storage().ref(`${title}/${id}/${lang}/other/${i}`).put(imgs[i].imgData).then(
-                async (snapshot) => {
-                  let linkItem =  await snapshot.ref.getDownloadURL();
-                  console.log(linkItem)
-                  localImgArr.push(linkItem)
-                }
-              )
-            }
-          }
-        }
-        console.log(title, imgs)
-        return localImgArr
-      } catch (e) {
-        commit('setError', e)
-        throw e
-      }
-    },
-
-    async check (id, counter) {
-      if (id != counter) {
-        const loadFilms = await this.$store.dispatch('fetchInfoById', {
-          title: 'Films',
-          id: this.id
-        })
-
-        if (loadFilms.lang === 'UA') {
-          this.$store.dispatch('changeLocale', 'ukr-UKR')
-          this.page = loadFilms.UA
-          this.ua = loadFilms.UA
-          this.localMainImg = loadFilms.UA.mainImg
-          if ( loadFilms.UA.localImgArr !== undefined ) {
-            for (let i = 0; i < loadFilms.UA.localImgArr.length; i++) {
-              this.localImg[i].img = loadFilms.UA.localImgArr[i]
-            }
-          }
-          if ( loadFilms.RU ) {
-            this.ru = loadFilms.RU
-          }
-        }
-
-        if (loadFilms.lang === 'RU') {
-          this.$store.dispatch('changeLocale', 'rus-RUS')
-          this.lang = 'RU'
-          this.page = loadFilms.RU
-          this.ru = loadFilms.RU
-          this.localMainImg = loadFilms.RU.mainImg
-          if ( loadFilms.RU.localImgArr !== undefined ) {
-            for (let i = 0; i < loadFilms.RU.localImgArr.length; i++) {
-              this.localImg[i].img = loadFilms.RU.localImgArr[i]
-            }
-          }
-          if ( loadFilms.UA ) {
-            this.ua = loadFilms.UA
-          }
-        }
-      }
-    },
-
-    async addFilm () {
+    async addPages () {
       try {
         this.loading = true
 
         if (this.mainImageData) {
-          this.page.mainImg = await this.addImg( 'Films', this.lang, this.mainImageData, this.id, 'main')
+          this.page.mainImg = await Module.addImg( 'Pages', this.lang, this.mainImageData, this.id, 'main')
         }
 
-        this.page.localImgArr = await this.addOtherImg( 'Films', this.lang, this.localImg, this.id )
+        this.page.localImgArr = await Module.addOtherImg( 'Pages', this.lang, this.localImg, this.id )
 
-        await this.addInfoFilm (this.page, this.lang, this.id)
+        await Module.addInfoById('Pages', this.page, this.lang, this.id)
 
-        await this.$store.dispatch('addCounter')
+        await Module.addCounter()
 
         this.loading = false
 
-        this.$router.push({path: '/films'})
+        this.$router.push({path: '/pages'})
       } catch (e) {}
     }, 
+
+    async check (id, counter) {
+      if (id != counter) {
+        const loadNews = await Module.fetchInfoById('Pages', this.id)
+        console.log(loadNews)
+        if (loadNews.lang === 'UA') {
+          this.$store.dispatch('changeLocale', 'ukr-UKR')
+          this.page = loadNews.UA
+          this.ua = loadNews.UA
+          this.localMainImg = loadNews.UA.mainImg
+          if ( loadNews.UA.localImgArr !== undefined ) {
+            for (let i = 0; i < loadNews.UA.localImgArr.length; i++) {
+              this.localImg[i].img = loadNews.UA.localImgArr[i]
+            }
+          }
+          if ( loadNews.RU ) {
+            this.ru = loadNews.RU
+          }
+        }
+
+        if (loadNews.lang === 'RU') {
+          this.$store.dispatch('changeLocale', 'rus-RUS')
+          this.lang = 'RU'
+          this.page = loadNews.RU
+          this.ru = loadNews.RU
+          this.localMainImg = loadNews.RU.mainImg
+          if ( loadNews.RU.localImgArr !== undefined ) {
+            for (let i = 0; i < loadNews.RU.localImgArr.length; i++) {
+              this.localImg[i].img = loadNews.RU.localImgArr[i]
+            }
+          }
+          if ( loadNews.UA ) {
+            this.ua = loadNews.UA
+          }
+        }
+      }
+    },
   },
+
   async mounted () {
     this.id  = this.$route.params.id
-    const counter = await this.$store.dispatch('getCounter')
+    const counter = await Module.getCounter()
 
     await this.check(this.id, counter)
 

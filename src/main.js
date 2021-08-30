@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Paginate from 'vuejs-paginate'
 import router from './router'
 import store from './store'
 
 import { firestorePlugin } from 'vuefire'
+import localizeFilter from '@/filters/localize.filter'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -14,7 +16,9 @@ import '@/../public/plugins/fontawesome-free/css/all.min.css'
 
 Vue.config.productionTip = false
 
+Vue.component('Paginate', Paginate)
 Vue.use(firestorePlugin)
+Vue.filter('localize', localizeFilter)
 
 firebase.initializeApp({
   apiKey: 'AIzaSyBG5rjKmsjS0f0Yzv_Xt9fA-HHZ15L7I4s',
