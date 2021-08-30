@@ -57,6 +57,9 @@ export default {
         this.loader = false
       } catch (e) {}
     },
+    test () {
+      console.log('test')
+    }
   },
   async mounted () {
     try {
