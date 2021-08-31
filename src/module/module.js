@@ -97,6 +97,23 @@ export default {
       return (await firebase.database().ref(`/${title}`).child(`${banner}`).get()).val()
     } catch (e) {}
   },
+    // CINEMA
+  async addHallById (title, item, lang, id, cinemaId) {
+    try {
+      await firebase.database().ref(`/${title}/${cinemaId}/${id}/${lang}`).set(item)
+      await firebase.database().ref(`/${title}/${cinemaId}/${id}/lang`).set(lang)
+    } catch (e) {
+      commit('setError', e)
+      throw e
+    }
+  },
+  async fetchCinemaHallsById (title, id) {
+    try {
+      return (await firebase.database().ref(`/${title}`).child(id).once('value')).val() || {}
+    } catch (e) {
+      console.log(e)
+    }
+  },
 
   async fetchInfo (title) {
     try {
@@ -157,5 +174,5 @@ export default {
       commit('setError', e)
       throw e
     }
-  },
+  }
 }
