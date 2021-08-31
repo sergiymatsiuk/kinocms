@@ -114,6 +114,18 @@ export default {
       console.log(e)
     }
   },
+  async deleteHall (title, cinemaId, id) {
+    try {
+      await firebase.database().ref(`${title}/${cinemaId}/${id}`).remove()
+    } catch (e) {}
+  },
+  async fetchCinemaHallById (title, cinemaId, id) {
+    try {
+      return (await firebase.database().ref(`/${title}/${cinemaId}`).child(id).once('value')).val() || {}
+    } catch (e) {
+      console.log(e)
+    }
+  },
 
   async fetchInfo (title) {
     try {
