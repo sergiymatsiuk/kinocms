@@ -165,8 +165,8 @@
         </div>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addAction">{{'Save' | localize}}</button>
-        <button type="submit" class="btn btn-default col-sm-6" @click.prevent="deleteAll">
+        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addHall">{{'Save' | localize}}</button>
+        <button type="submit" class="btn btn-default col-sm-6">
           {{'DeleteForm' | localize}}
         </button>
       </div>
@@ -176,6 +176,7 @@
 
 <script>
 /* eslint-disable */
+import Module from '@/module/module'
 import Loader from '@/components/Loader'
 import CardShowImg from '@/components/CardShowImg'
 
@@ -289,7 +290,7 @@ export default {
     changeLocalImg(card) {
       this.localImg[card.id] = card
     },
-        // основне фото
+    // основне фото
     selectLocalImg() {
       this.$refs.input1.click()
     },
@@ -317,10 +318,32 @@ export default {
       this.localBannerImg = ''
       this.bannerImg = 'https://cdn.tribuna.com.ua/uploads/1398/1398-zhk_televizor_zvuk_est_izobrazheniya_net_prichina_1-300x169.jpg'
     },
+
+    async addHall () {
+      this.loading = true
+      try {
+        if (this.mainImageData) {
+          this.page.mainImg = await Module.addImg (this.title, this.lang, this.mainImageData, this.id, 'main')
+        }
+
+        if (this.bannerImageData) {
+          this.page.bannerImg = await Module.addImg (this.title, this.lang, this.bannerImageData, this.id, 'banner')
+        }
+        this.page.localImgArr = await Module.addOtherImg(this.title, this.lang, this.localImg, this.id)
+
+        await Module.addHallById (this.title, this.page, this.lang, this.id, this.cinemaId)
+
+      } catch (e) {
+        console.log(e)
+      }
+      this.loading = false
+      this.$router.push({ path: '/cinemas-page/' + this.cinemaId})
+    },
   },
   async mounted () {
     this.cinemaId  = this.$route.params.id
-    this.id = Math.floor(Math.random()*1000)
+    this.id = Math.floor(Math.random()*10000)
+    console.log(this.cinemaId, this.id)
   }
 }
 </script>
