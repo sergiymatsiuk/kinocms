@@ -331,7 +331,7 @@ export default {
         }
         this.page.localImgArr = await Module.addOtherImg(this.title, this.lang, this.localImg, this.id)
 
-        await Module.addHallById (this.title, this.page, this.lang, this.id, this.cinemaId)
+        await Module.addHallById(this.title, this.page, this.lang, this.id, this.cinemaId)
 
       } catch (e) {
         console.log(e)
@@ -339,11 +339,55 @@ export default {
       this.loading = false
       this.$router.push({ path: '/cinemas-page/' + this.cinemaId})
     },
+    async fetchHallInfo (cinemaId, id) {
+      const loadHall = await Module.fetchCinemaHallById (this.title, cinemaId, id)
+        if (loadHall.lang === 'UA') {
+          this.$store.dispatch('changeLocale', 'ukr-UKR')
+          this.page = loadHall.UA
+          this.ua = loadHall.UA
+          this.localMainImg = loadHall.UA.mainImg
+          this.localBannerImg = loadHall.UA.bannerImg
+          if ( loadHall.UA.localImgArr !== undefined ) {
+            for (let i = 0; i < loadHall.UA.localImgArr.length; i++) {
+              this.localImg[i].img = loadHall.UA.localImgArr[i]
+            }
+          }
+          if ( loadHall.RU ) {
+            this.ru = loadHall.RU
+          }
+        }
+
+        if (loadHall.lang === 'RU') {
+          this.$store.dispatch('changeLocale', 'rus-RUS')
+          this.lang = 'RU'
+          this.page = loadHall.RU
+          this.ru = loadHall.RU
+          this.localMainImg = loadHall.RU.mainImg
+          this.localBannerImg = loadHall.RU.bannerImg
+          if ( loadHall.RU.localImgArr !== undefined ) {
+            for (let i = 0; i < loadHall.RU.localImgArr.length; i++) {
+              this.localImg[i].img = loadHall.RU.localImgArr[i]
+            }
+          }
+          if ( loadHall.UA ) {
+            this.ua = loadHall.UA
+          }
+        }
+    }
   },
   async mounted () {
-    this.cinemaId  = this.$route.params.id
-    this.id = Math.floor(Math.random()*10000)
-    console.log(this.cinemaId, this.id)
+    this.loading = true
+    const idxArr = this.$route.params.id.split('-')
+    if ( idxArr.length === 2) {
+      this.cinemaId = idxArr[0]
+      this.id = idxArr[1]
+      await this.fetchHallInfo(this.cinemaId, this.id)
+    } else {
+      this.cinemaId  = this.$route.params.id
+      this.id = Math.floor(Math.random()*10000)
+      console.log(this.cinemaId, this.id)
+    }
+    this.loading = false
   }
 }
 </script>

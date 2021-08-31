@@ -124,7 +124,12 @@
           <div class="d-flex justify-content-center mt-3">
             <h4>{{'ListHalls' | localize}}</h4>
           </div>
-          <TableInfoCinemas v-if="!page.halls"/>
+          <TableInfoCinemas
+            v-if="page.halls.length"
+            :halls="page.halls"
+            :cinemaId="id"
+            @changeHalls="changeHalls"
+            />
           <p class="no-halls" v-else>{{'NoHalls' | localize}}</p>
           <div class="align-self-center mt-3">
             <button type="submit" class="btn btn-info col" style="width: 300px" @click="addNewHall">{{'CreateHall' | localize}}</button>
@@ -351,11 +356,20 @@ export default {
     addNewHall () {
       this.$router.push('/cinemas-hall/' + this.id)
     },
+    async changeHalls () {
+      const loadHalls = await Module.fetchCinemaHallsById('Halls', this.id)
+      const ruHalls = [], uaHalls = []
+        Object.keys(loadHalls)
+        .map(key => ({ ...loadHalls[key], id: key}))
+        .forEach( el => {
+          el.lang === 'UA' ? uaHalls.push({...el.UA, id: el.id}) : ruHalls.push({...el.RU, id: el.id})
+      })
+      this.lang === 'UA' ? this.page.halls = uaHalls : this.page.halls = ruHalls
+      this.ua.halls = uaHalls
+      this.ru.halls = ruHalls
+    },
 
     async addCinema () {
-      console.log(this.page)
-      console.log(this.localImg)
-      console.log(this.mainImageData)
       try {
         this.loading = true
 
@@ -364,11 +378,10 @@ export default {
         }
 
         if (this.bannerImageData) {
-          this.page.mainImg = await Module.addImg (this.title, this.lang, this.bannerImageData, this.id, 'banner')
+          this.page.bannerImg = await Module.addImg (this.title, this.lang, this.bannerImageData, this.id, 'banner')
         }
 
         this.page.localImgArr = await Module.addOtherImg(this.title, this.lang, this.localImg, this.id)
-        console.log(this.page.localImgArr)
         
         await Module.addInfoById (this.title, this.page, this.lang, this.id)
 
@@ -384,39 +397,54 @@ export default {
 
     async check (id, counter) {
       if (id != counter) {
-        const loadFilms = await this.$store.dispatch('fetchInfoById', {
-          title: 'Films',
-          id: this.id
+        const loadCinema = await Module.fetchInfoById(this.title, id)
+        const loadHalls = await Module.fetchCinemaHallsById('Halls', id)
+        const ruHalls = [], uaHalls = []
+        
+        Object.keys(loadHalls)
+        .map(key => ({ ...loadHalls[key], id: key}))
+        .forEach( el => {
+          el.lang === 'UA' ? uaHalls.push({...el.UA, id: el.id}) : ruHalls.push({...el.RU, id: el.id})
         })
 
-        if (loadFilms.lang === 'UA') {
+        if (loadCinema.lang === 'UA') {
           this.$store.dispatch('changeLocale', 'ukr-UKR')
-          this.page = loadFilms.UA
-          this.ua = loadFilms.UA
-          this.localMainImg = loadFilms.UA.mainImg
-          if ( loadFilms.UA.localImgArr !== undefined ) {
-            for (let i = 0; i < loadFilms.UA.localImgArr.length; i++) {
-              this.localImg[i].img = loadFilms.UA.localImgArr[i]
+          this.page = loadCinema.UA
+          this.ua = loadCinema.UA
+          this.page.halls = uaHalls
+          this.ua.halls = uaHalls
+          this.ru.halls = ruHalls
+          this.localMainImg = loadCinema.UA.mainImg
+          this.localBannerImg = loadCinema.UA.bannerImg
+          if ( loadCinema.UA.localImgArr !== undefined ) {
+            for (let i = 0; i < loadCinema.UA.localImgArr.length; i++) {
+              this.localImg[i].img = loadCinema.UA.localImgArr[i]
             }
           }
-          if ( loadFilms.RU ) {
-            this.ru = loadFilms.RU
+          if ( loadCinema.RU ) {
+            this.ru = loadCinema.RU
+            this.ru.halls = ruHalls
           }
         }
 
-        if (loadFilms.lang === 'RU') {
+        if (loadCinema.lang === 'RU') {
           this.$store.dispatch('changeLocale', 'rus-RUS')
           this.lang = 'RU'
-          this.page = loadFilms.RU
-          this.ru = loadFilms.RU
-          this.localMainImg = loadFilms.RU.mainImg
-          if ( loadFilms.RU.localImgArr !== undefined ) {
-            for (let i = 0; i < loadFilms.RU.localImgArr.length; i++) {
-              this.localImg[i].img = loadFilms.RU.localImgArr[i]
+          this.page = loadCinema.RU
+          this.page.halls = ruHalls
+          this.ru = loadCinema.RU
+          this.ru.halls = ruHalls
+          this.ua.halls = uaHalls
+          this.localMainImg = loadCinema.RU.mainImg
+          this.localBannerImg = loadCinema.RU.bannerImg
+          if ( loadCinema.RU.localImgArr !== undefined ) {
+            for (let i = 0; i < loadCinema.RU.localImgArr.length; i++) {
+              this.localImg[i].img = loadCinema.RU.localImgArr[i]
             }
           }
-          if ( loadFilms.UA ) {
-            this.ua = loadFilms.UA
+          if ( loadCinema.UA ) {
+            this.ua = loadCinema.UA
+            this.ua.halls = uaHalls
           }
         }
       }
@@ -424,11 +452,12 @@ export default {
   },
   async mounted () {
     this.id  = this.$route.params.id
-    const counter = await this.$store.dispatch('getCounter')
+    const counter = await Module.getCounter()
 
     await this.check(this.id, counter)
 
-    this.loading = false     
+    this.loading = false
+    console.log(this.ua, this.ru, this.page)  
   }
 }
 </script>

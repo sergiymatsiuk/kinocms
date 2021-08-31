@@ -71,5 +71,6 @@ export default {
   components: {
     Loader, CardCinemas
   }
+  
 }
 </script>
