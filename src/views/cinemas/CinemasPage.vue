@@ -1,7 +1,7 @@
 <template>
   <div class="card card-info">
     <Loader v-if="loading"/>
-    <form class="form-horizontal"  v-else>
+    <form class="form-horizontal border border-secondary m-3" v-else>
       <div class="card-body">
         <div class="form-group d-flex flex-row-reverse">
           <button
