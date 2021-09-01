@@ -53,5 +53,18 @@
 
   "ListHalls": "Список Залов",
   "CreateHall": "Создать Зал",
-  "NoHalls": "Пока нет!"
+  "NoHalls": "Пока нет!",
+
+  "SelectUsers": "Выбрать пользователей кому слать",
+  "AllUsers": "Все пользователи",
+  "Select": "Выборочно!",
+  "SelectUsersList": "Выбрать пользователей",
+  "Symbols": "Символов ",
+  "NumberSMS": "Кол-во SMS: ",
+  "MailingLoading": "Рассылка выполнена на: ",
+  "LoadMail": "Загрузить HTML-письмо",
+  "ShowLoad": "Загружен файл: ",
+  "TemplateMail": "Шаблон используемый в текущей рассылке: ",
+  "NumberMail": "Кол-во писем: ",
+  "StartMailing": "Начать рассылку"
 }

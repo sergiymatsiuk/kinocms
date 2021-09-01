@@ -53,5 +53,19 @@
 
   "ListHalls": "Список Залів",
   "CreateHall": "Створити зал",
-  "NoHalls": "Поки немає!"
+  "NoHalls": "Поки немає!",
+
+  "SelectUsers": "Вибрати користувачів, кому відправляти",
+  "AllUsers": "Всі користувачі",
+  "Select": "Вибірково",
+  "SelectUsersList": "Вибрати користувачів",
+  "Symbols": "Символів ",
+  "NumberSMS": "К-ть SMS: ",
+  "MailingLoading": "Розсилка виконана: ",
+  "StartMailing": "Почати розсилку",
+  "LoadMail": "Загрузити HTML-лист",
+  "ShowLoad": "Загружений файл: ",
+  "TemplateMail": "Шаблон, що використовується: ",
+  "NumberMail": "К-ть листів: ",
+  "Load": "Завантажити"
 }
