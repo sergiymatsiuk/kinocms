@@ -94,7 +94,7 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/films:id" class="nav-link ml-2">
+                <router-link to="/mailing-select-user" class="nav-link ml-2">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Выбор пользователей</p>
                 </router-link>

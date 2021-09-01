@@ -37,7 +37,12 @@ const routes = [
   {
     path: '/mailing',
     name: 'Mailing',
-    component: () => import('../views/Mailing.vue')
+    component: () => import('../views/mailing/Mailing.vue')
+  },
+  {
+    path: '/mailing-select-user',
+    name: 'SelectUser',
+    component: () => import('../views/mailing/UserFromMailing.vue')
   },
   {
     path: '/news',
