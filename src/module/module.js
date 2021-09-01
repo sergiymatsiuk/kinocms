@@ -97,6 +97,7 @@ export default {
       return (await firebase.database().ref(`/${title}`).child(`${banner}`).get()).val()
     } catch (e) {}
   },
+  
     // CINEMA
   async addHallById (title, item, lang, id, cinemaId) {
     try {
