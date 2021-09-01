@@ -45,23 +45,8 @@
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Кинотеатры
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ml-2">
-                <router-link to="/cinemas:id" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Карточка кинотеатра</p>
-                </router-link>
-              </li>
-              <li class="nav-item ml-2">
-                <router-link to="/cinemas:id" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Карточка зала</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
