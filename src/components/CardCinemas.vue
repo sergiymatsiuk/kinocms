@@ -38,6 +38,7 @@ export default {
   methods: {
     async deleteCardCinemas () {
       await Module.deleteItem(this.title, this.cinema.id)
+      await Module.deleteItem('Halls', this.cinema.id)
       this.$emit('changeCinemas')
     },
 
