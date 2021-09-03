@@ -73,9 +73,7 @@ export default {
       })
     },
     selectUserList () {
-      console.log(this.users.filter(el => {
-        return el.select === true
-      }))
+      this.$router.push({ path: '/mailing/select-mailing' })
     }
   },
   computed: {

@@ -17,7 +17,7 @@
             <input class="form-check-input" type="radio" name="Select" :value='false' v-model="allUsers">
             <label class="form-check-label">{{'Select' | localize}}</label>
           </div>
-          <button type="submit" class="btn btn-info col-sm-3">{{'SelectUsersList' | localize}}</button>
+          <button type="submit" class="btn btn-info col-sm-3" @click.prevent="selectUsers">{{'SelectUsersList' | localize}}</button>
         </div>
         <div class="form-group d-flex">
           <div class="form-group column col-6">
@@ -62,6 +62,11 @@ export default {
       SMS: '',
       maxSMS: 50,
       users: []
+    }
+  },
+  methods: {
+    selectUsers () {
+      this.$router.push({ path: '/mailing-select-user' })
     }
   },
   computed: {

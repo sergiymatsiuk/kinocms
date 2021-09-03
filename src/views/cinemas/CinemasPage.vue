@@ -358,6 +358,7 @@ export default {
     },
     async changeHalls () {
       const loadHalls = await Module.fetchCinemaHallsById('Halls', this.id)
+      console.log(loadHalls)
       const ruHalls = [], uaHalls = []
         Object.keys(loadHalls)
         .map(key => ({ ...loadHalls[key], id: key}))
@@ -447,6 +448,24 @@ export default {
             this.ua.halls = uaHalls
           }
         }
+      } else {
+        const page = this.page
+        const MainImageData = this.mainImageData
+
+        const loadHalls = await Module.fetchCinemaHallsById('Halls', this.id)
+        console.log(loadHalls)
+        const ruHalls = [], uaHalls = []
+          Object.keys(loadHalls)
+          .map(key => ({ ...loadHalls[key], id: key}))
+          .forEach( el => {
+            el.lang === 'UA' ? uaHalls.push({...el.UA, id: el.id}) : ruHalls.push({...el.RU, id: el.id})
+        })
+        this.lang === 'UA' ? this.page.halls = uaHalls : this.page.halls = ruHalls
+        this.ua.halls = uaHalls
+        this.ru.halls = ruHalls
+
+        this.mainImageData = MainImageData
+        this.page = page
       }
     },
   },
