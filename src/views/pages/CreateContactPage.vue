@@ -117,7 +117,6 @@ export default {
     },
     changeCinemas (item) {
       this.newCinemas.push(item)
-      console.log(this.newCinemas)
     },
     async addCinemaToData () {
       this.loading = true

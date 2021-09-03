@@ -52,7 +52,7 @@ export default {
       this.addToParent()
     },
     async showItemDetail (id) {
-      this.$router.push('/action-pages/' + id)
+      this.$router.push('/admin/action-pages/' + id)
     },
     addToParent () {
       this.$emit('changeActions', this.newActions)

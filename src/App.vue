@@ -11,6 +11,7 @@
 
 import EmptyLayout from '@/layouts/EmptyLayout'
 import AdminLayout from '@/layouts/AdminLayout'
+import UserLayout from '@/layouts/UserLayout'
 
 export default {
   data () {
@@ -18,7 +19,7 @@ export default {
     }
   },
   components: {
-    EmptyLayout, AdminLayout
+    EmptyLayout, AdminLayout, UserLayout
   },
   computed: {
     layout  () {
