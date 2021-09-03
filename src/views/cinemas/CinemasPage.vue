@@ -354,8 +354,9 @@ export default {
     },
 
     addNewHall () {
-      this.$router.push('/cinemas-hall/' + this.id)
+      this.$router.push('/admin/cinemas-hall/' + this.id)
     },
+  
     async changeHalls () {
       const loadHalls = await Module.fetchCinemaHallsById('Halls', this.id)
       console.log(loadHalls)

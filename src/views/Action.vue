@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     createAction () {
-      this.$router.push({path: '/action-pages/' + this.id})
+      this.$router.push({path: '/admin/action-pages/' + this.id})
     },
     loadNewActions (newActions) {
       this.actions = newActions

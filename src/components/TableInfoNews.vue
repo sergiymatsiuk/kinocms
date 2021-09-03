@@ -56,7 +56,7 @@ export default {
     },
     async showItemDetail (id) {
       console.log(1)
-      this.$router.push('/news-pages/' + id)
+      this.$router.push('/admin/news-pages/' + id)
     }
   }
 }

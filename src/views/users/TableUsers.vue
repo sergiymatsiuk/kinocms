@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     editUsers (id) {
-      this.$router.push({ path: '/create-users/' + id })
+      this.$router.push({ path: '/admin/create-users/' + id })
     },
     deleteUser (id) {
       this.$emit('delete-user-by-id', id)

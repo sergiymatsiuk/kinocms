@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     createNews () {
-      this.$router.push({path: '/news-pages/' + this.id})
+      this.$router.push({path: '/admin/news-pages/' + this.id})
     },
     loadNewActions (newActions) {
       this.news = newActions

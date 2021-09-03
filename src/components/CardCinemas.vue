@@ -43,7 +43,7 @@ export default {
     },
 
     async showCinemaInfo () {
-      this.$router.push({ path: '/cinemas-page/' + this.cinema.id })
+      this.$router.push({ path: '/admin/cinemas-page/' + this.cinema.id })
     }
   }
 }

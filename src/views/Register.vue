@@ -66,7 +66,7 @@
               </div>
             </div>
             <div class="input-group mt-3 mb-3">
-              <button type="submit" class="btn btn-info btn-block">Зареєструватися</button>
+              <router-link to="/" type="submit" class="btn btn-info btn-block">Зареєструватися</router-link>
             </div>
           </form>
           <router-link to="/login" class="text-center text-info">Я зареєстрований, хочу ввійти</router-link>

@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     selectUsers () {
-      this.$router.push({ path: '/mailing-select-user' })
+      this.$router.push({ path: '/admin/mailing-select-user' })
     }
   },
   computed: {

@@ -1,18 +1,12 @@
 <template>
   <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
     <a href="#" class="brand-link text-center text-m">
       <span class="brand-text justify-content-center">KinoCMS</span>
     </a>
-
-    <!-- Sidebar -->
     <div class="sidebar">
-
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
           <li class="nav-item">
             <router-link to="/" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
@@ -23,7 +17,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/banner" class="nav-link">
+            <router-link to="/admin/banner" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>Баннеры</p>
             </router-link>
@@ -32,7 +26,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/films" class="nav-link">
+            <router-link to="/admin/films" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Фильмы
@@ -41,7 +35,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/cinemas" class="nav-link">
+            <router-link to="/admin/cinemas" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Кинотеатры
@@ -50,7 +44,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/news" class="nav-link">
+            <router-link to="/admin/news" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Новости
@@ -59,7 +53,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/action" class="nav-link">
+            <router-link to="/admin/action" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Акции
@@ -68,7 +62,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/pages" class="nav-link">
+            <router-link to="/admin/pages" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Страницы
@@ -76,7 +70,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/users" class="nav-link">
+            <router-link to="/admin/users" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Пользователи
@@ -85,7 +79,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/mailing/select-mailing" class="nav-link">
+            <router-link to="/admin/mailing/select-mailing" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Рассылка
@@ -94,7 +88,6 @@
           </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
   </aside>
 </template>

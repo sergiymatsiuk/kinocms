@@ -324,7 +324,7 @@ export default {
 
         this.loading = false
 
-        this.$router.push({path: '/action'})
+        this.$router.push({path: '/admin/action'})
       } catch (e) {}
     },
 

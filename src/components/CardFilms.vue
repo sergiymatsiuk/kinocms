@@ -43,7 +43,7 @@ export default {
     },
 
     async showFilmInfo () {
-      this.$router.push({ path: '/films-pages/' + this.film.id })
+      this.$router.push({ path: '/admin/films-pages/' + this.film.id })
     }
   },
   mounted () {

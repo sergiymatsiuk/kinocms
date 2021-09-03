@@ -62,7 +62,7 @@ export default {
 
   methods: {
     addNewFilm () {
-      this.$router.push({ path: '/films-pages/' + this.id})
+      this.$router.push({ path: '/admin/films-pages/' + this.id})
     },
 
     async loadNewFilms () {

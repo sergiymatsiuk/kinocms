@@ -7,108 +7,128 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
+    meta: { layout: 'empty' },
     component: () => import('../views/Login.vue')
   },
   {
     path: '/register',
     name: 'Register',
+    meta: { layout: 'empty' },
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/banner',
+    path: '/admin/banner',
     name: 'Banner',
+    meta: { layout: 'admin' },
     component: () => import('../views/Banner.vue')
   },
   {
-    path: '/cinemas',
+    path: '/admin/cinemas',
     name: 'Cinemas',
+    meta: { layout: 'admin' },
     component: () => import('../views/cinemas/Cinemas.vue')
   },
   {
-    path: '/cinemas-page/:id',
+    path: '/admin/cinemas-page/:id',
     name: 'CinemasPage',
+    meta: { layout: 'admin' },
     component: () => import('../views/cinemas/CinemasPage.vue')
   },
   {
-    path: '/cinemas-hall/:id',
+    path: '/admin/cinemas-hall/:id',
     name: 'CinemasHall',
+    meta: { layout: 'admin' },
     component: () => import('../views/cinemas/CinemasHall.vue')
   },
   {
-    path: '/films',
+    path: '/admin/films',
     name: 'Films',
+    meta: { layout: 'admin' },
     component: () => import('../views/Films.vue')
   },
   {
-    path: '/films-pages/:id',
+    path: '/admin/films-pages/:id',
     name: 'FilmsPage',
+    meta: { layout: 'admin' },
     component: () => import('../views/FilmsPage.vue')
   },
   {
-    path: '/mailing/select-mailing',
+    path: '/admin/mailing/select-mailing',
     name: 'Mailing',
-    props: true,
+    meta: { layout: 'admin' },
     component: () => import('../views/mailing/Mailing.vue')
   },
   {
-    path: '/mailing/select-user',
+    path: '/admin/mailing/select-user',
     name: 'SelectUser',
     props: true,
+    meta: { layout: 'admin' },
     component: () => import('../views/mailing/UserFromMailing.vue')
   },
   {
-    path: '/news',
+    path: '/admin/news',
     name: 'News',
+    meta: { layout: 'admin' },
     component: () => import('../views/News.vue')
   },
   {
-    path: '/news-pages/:id',
+    path: '/admin/news-pages/:id',
     name: 'NewsPages',
+    meta: { layout: 'admin' },
     component: () => import('../views/NewsPages.vue')
   },
   {
-    path: '/pages',
+    path: '/admin/pages',
     name: 'Pages',
+    meta: { layout: 'admin' },
     component: () => import('../views/pages/Pages.vue')
   },
   {
-    path: '/create-pages/:id',
+    path: '/admin/create-pages/:id',
     name: 'CreatePages',
+    meta: { layout: 'admin' },
     component: () => import('../views/pages/CreatePages.vue')
   },
   {
-    path: '/create-main-page/:id',
+    path: '/admin/create-main-page/:id',
     name: 'CreateMainPage',
+    meta: { layout: 'admin' },
     component: () => import('../views/pages/CreateMainPage.vue')
   },
   {
-    path: '/create-contact-page/:id',
+    path: '/admin/create-contact-page/:id',
     name: 'CreateContactPage',
+    meta: { layout: 'admin' },
     component: () => import('../views/pages/CreateContactPage.vue')
   },
   {
-    path: '/action',
+    path: '/admin/action',
     name: 'Action',
+    meta: { layout: 'admin' },
     component: () => import('../views/Action.vue')
   },
   {
-    path: '/action-pages/:id',
+    path: '/admin/action-pages/:id',
     name: 'ActionPages',
+    meta: { layout: 'admin' },
     component: () => import('../views/ActionPages.vue')
   },
   {
     path: '/',
     name: 'Statistics',
+    meta: { layout: 'admin' },
     component: () => import('../views/Statistics.vue')
   },
   {
-    path: '/create-users/:id',
+    path: '/admin/create-users/:id',
     name: 'CreateUsers',
+    meta: { layout: 'admin' },
     component: () => import('../views/users/CreateUsers.vue')
   },
   {
-    path: '/users',
+    path: '/admin/users',
     name: 'Users',
+    meta: { layout: 'admin' },
     component: () => import('../views/users/Users.vue')
   }
 ]

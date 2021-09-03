@@ -337,7 +337,7 @@ export default {
         console.log(e)
       }
       this.loading = false
-      this.$router.push({ path: '/cinemas-page/' + this.cinemaId})
+      this.$router.push({ path: '/admin/cinemas-page/' + this.cinemaId})
     },
     async fetchHallInfo (cinemaId, id) {
       const loadHall = await Module.fetchCinemaHallById (this.title, cinemaId, id)

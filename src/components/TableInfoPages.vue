@@ -59,11 +59,11 @@ export default {
     },
     async showItemDetail (id, link) {
       if (link === 'main' ) {
-        this.$router.push('/create-main-page/' + id)
+        this.$router.push('/admin/create-main-page/' + id)
       } else if (link === 'contact' ) {
-         this.$router.push('/create-contact-page/' + id)
+         this.$router.push('/admin/create-contact-page/' + id)
       } else {
-        this.$router.push('/create-pages/' + id)
+        this.$router.push('/admin/create-pages/' + id)
       }
     },
     addToParent () {

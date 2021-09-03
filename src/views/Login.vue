@@ -25,7 +25,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <button type="submit" class="btn btn-info btn-block">Вхід</button>
+                <router-link to="/" type="submit" class="btn btn-info btn-block">Вхід</router-link>
               </div>
             </div>
           </form>

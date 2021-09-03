@@ -203,7 +203,7 @@ export default {
 
         this.loading = false
 
-        this.$router.push({path: '/pages'})
+        this.$router.push({path: '/admin/pages'})
       } catch (e) {}
     }, 
   },

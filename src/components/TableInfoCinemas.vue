@@ -50,7 +50,7 @@ export default {
       this.$emit('changeHalls')
     },
     async showItemDetail (id) {
-      this.$router.push({ path : '/cinemas-hall/'+this.cinemaId+'-'+id})
+      this.$router.push({ path : '/admin/cinemas-hall/'+this.cinemaId+'-'+id})
     }
   }
 }

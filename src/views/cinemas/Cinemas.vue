@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     addNewCinema () {
-      this.$router.push({ path: '/cinemas-page/' + this.id})
+      this.$router.push({ path: '/admin/cinemas-page/' + this.id})
     },
     async loadNewCinemas () {
       try {

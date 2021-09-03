@@ -460,7 +460,7 @@ export default {
 
         this.loading = false
 
-        this.$router.push({path: '/films'})
+        this.$router.push({path: '/admin/films'})
       } catch (e) {}
     }, 
   },

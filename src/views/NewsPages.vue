@@ -322,7 +322,7 @@ export default {
 
         this.loading = false
 
-        this.$router.push({path: '/news'})
+        this.$router.push({path: '/admin/news'})
       } catch (e) {}
     }, 
 

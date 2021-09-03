@@ -1,20 +1,16 @@
 <template>
-  <div id="app" class="wrapper">
-
-    <Navbar />
-
-    <Sidebar />
-
-    <router-view class="content-wrapper"/>
-
+  <div id="app">
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-import Sidebar from '@/components/Sidebar'
-import Navbar from '@/components/Navbar'
-import Loader from '@/components/Loader'
+
+import EmptyLayout from '@/layouts/EmptyLayout'
+import AdminLayout from '@/layouts/AdminLayout'
 
 export default {
   data () {
@@ -22,7 +18,13 @@ export default {
     }
   },
   components: {
-    Sidebar, Navbar, Loader
+    EmptyLayout, AdminLayout
+  },
+  computed: {
+    layout  () {
+      console.log(this.$route.meta)
+      return (this.$route.meta.layout || 'empty') + '-layout'
+    }
   }
 }
 </script>

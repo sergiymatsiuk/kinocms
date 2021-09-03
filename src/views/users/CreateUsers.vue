@@ -171,7 +171,7 @@ export default {
       this.loading = true
       await Module.addInfoByIdUsers(this.title, this.user, this.id)
       this.loading = false
-      this.$router.push({ path: '/users'})
+      this.$router.push({ path: '/admin/users'})
     }
   },
   async mounted () {
