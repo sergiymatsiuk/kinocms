@@ -85,21 +85,12 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/mailing" class="nav-link">
+            <router-link to="/mailing/select-mailing" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Рассылка
-                <i class="fas fa-angle-left right"></i>
               </p>
             </router-link>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <router-link to="/mailing-select-user" class="nav-link ml-2">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Выбор пользователей</p>
-                </router-link>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
