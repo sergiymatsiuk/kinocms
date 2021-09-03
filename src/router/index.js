@@ -5,6 +5,16 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },
+  {
     path: '/banner',
     name: 'Banner',
     component: () => import('../views/Banner.vue')
@@ -35,13 +45,15 @@ const routes = [
     component: () => import('../views/FilmsPage.vue')
   },
   {
-    path: '/mailing',
+    path: '/mailing/select-mailing',
     name: 'Mailing',
+    props: true,
     component: () => import('../views/mailing/Mailing.vue')
   },
   {
-    path: '/mailing-select-user',
+    path: '/mailing/select-user',
     name: 'SelectUser',
+    props: true,
     component: () => import('../views/mailing/UserFromMailing.vue')
   },
   {
