@@ -2,8 +2,8 @@
   <div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
       <div class="container not-margin border border-info">
-        <router-link to='/login' class="navbar-brand">
-          <span class="brand-text font-weight-light">KinoCMS</span>
+        <router-link to='/login' class="navbar-brand ml-2">
+          <span class="brand-text font-weight-700"><h4>KinoCMS</h4></span>
         </router-link>
         <div class="d-flex flex-column col-10">
           <div class="d-flex justify-content-end">
@@ -45,7 +45,7 @@
             </div>
             <div class="ml-5 d-flex align-items-center">
               <router-link to="/login" class="login">
-                <h4>USER</h4>
+                <h5>ВХОД</h5>
               </router-link>
             </div>
           </div>
