@@ -391,7 +391,7 @@ export default {
 
         this.loading = false
 
-        this.$router.push({ path: '/cinemas'})
+        this.$router.push({ path: '/admin/cinemas'})
       } catch (e) {
         console.log(e)
       }
@@ -453,6 +453,7 @@ export default {
         const page = this.page
         const MainImageData = this.mainImageData
 
+        console.log('NEW CINEMA ID: ', this.id);
         const loadHalls = await Module.fetchCinemaHallsById('Halls', this.id)
         console.log(loadHalls)
         const ruHalls = [], uaHalls = []
@@ -478,6 +479,13 @@ export default {
 
     this.loading = false
     console.log(this.ua, this.ru, this.page)  
+  },
+  async save() {
+    const cinema = await service.save(this.cinema);
+
+    await service.saveHalls(cinema.id, this.cinema.halls);
+  
+
   }
 }
 </script>

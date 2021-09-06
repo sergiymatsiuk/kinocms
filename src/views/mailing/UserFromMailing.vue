@@ -73,7 +73,7 @@ export default {
       })
     },
     selectUserList () {
-      this.$router.push({ path: '/admin/mailing/select-mailing' })
+      this.$emit('select-user', this.selectUser)
     }
   },
   computed: {
@@ -96,6 +96,11 @@ export default {
     userBySearch () {
       return this.userByFilter.slice((this.userPage*this.userInPage-this.userInPage), (this.userPage*this.userInPage))
     },
+    selectUser () {
+      return this.users.filter(el => {
+        return el.select === true
+      })
+    }
   },
   async mounted () {
     this.id = await Module.getCounter()

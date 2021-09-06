@@ -128,6 +128,25 @@ export default {
     }
   },
 
+    // MAILING
+  async addMailing (title, id, type, item) {
+    try {
+      await firebase.database().ref(`/${title}/${id}/${type}`).set(item)
+    } catch (e) {
+      commit('setError', e)
+      throw e
+    }
+  },
+  async addFile (title, id, item) {
+    try {
+      return await firebase.storage().ref(`${title}/${id}`).put(item).then(
+        async (snapshot) => {
+          return await snapshot.ref.getDownloadURL()
+        }
+      )
+    } catch (e) { }
+  },
+
   async fetchInfo (title) {
     try {
       const info = (await firebase.database().ref(`/${title}`).once('value')).val() || {}

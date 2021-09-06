@@ -59,17 +59,10 @@ const routes = [
     component: () => import('../views/FilmsPage.vue')
   },
   {
-    path: '/admin/mailing/select-mailing',
+    path: '/admin/mailing',
     name: 'Mailing',
     meta: { layout: 'admin' },
     component: () => import('../views/mailing/Mailing.vue')
-  },
-  {
-    path: '/admin/mailing/select-user',
-    name: 'SelectUser',
-    props: true,
-    meta: { layout: 'admin' },
-    component: () => import('../views/mailing/UserFromMailing.vue')
   },
   {
     path: '/admin/news',

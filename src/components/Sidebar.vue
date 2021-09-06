@@ -79,7 +79,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/admin/mailing/select-mailing" class="nav-link">
+            <router-link to="/admin/mailing" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>
                 Рассылка

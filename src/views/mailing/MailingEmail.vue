@@ -10,11 +10,11 @@
             <span>{{'SelectUsers' | localize}}</span>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="AllUsers" :value='true' v-model="allUsers">
+            <input class="form-check-input" type="radio" name="AllUsers" :value='true' v-model="selectAllUsers">
             <label class="form-check-label">{{'AllUsers' | localize}}</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="Select" :value='false' v-model="allUsers">
+            <input class="form-check-input" type="radio" name="Select" :value='false' v-model="selectAllUsers">
             <label class="form-check-label">{{'Select' | localize}}</label>
           </div>
           <button type="submit" class="btn btn-info col-sm-3" @click.prevent="selectUsers">{{'SelectUsersList' | localize}}</button>
@@ -28,51 +28,97 @@
                   type="file"
                   id="mail"
                   ref="input1"
-                  style="display: none">
+                  style="display: none"
+                  @change="addFile">
                 <label for="mail" class="btn btn-info btn-sm">{{'Load' | localize}}</label>
               </div>
             </div>
             <div class="d-flex mb-3">
               <span class="mr-3">{{'ShowLoad' | localize }}</span>
-              <span>НАЗВА ФАЙЛА</span>
+              <span v-if="mailData">{{mailData.name}}</span>
+              <span v-else>НАЗВА ФАЙЛА</span>
             </div>
             <div class="d-flex mb-3">
               <span class="mr-3">{{'TemplateMail' | localize }}</span>
               <span>НАЗВА ШАБЛОН</span>
             </div>
             <div class="d-flex mb-3">
-              <span class="mr-3">{{'NumberMail' | localize }}{{users.length}}</span>
+              <span class="mr-3">{{'NumberMail' | localize }}{{lengthArrOfUsers}}</span>
               <span class="mr-3">{{'MailingLoading' | localize }}0</span>
             </div>
           </div>
         </div>
       </div>
       <div class="card-footer d-flex justify-content-center">
-        <button type="submit" class="btn btn-info col-sm-6">{{'StartMailing' | localize}}</button>
+        <button type="submit" class="btn btn-info col-sm-6" @click.prevent="addMailing">{{'StartMailing' | localize}}</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import Module from '@/module/module'
+
 export default {
+  props: {
+    users: {
+      type: Array,
+      required: true
+    },
+    allUsers: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
-      allUsers: true,
-      SMS: '',
-      maxSMS: 50,
-      users: []
+      selectAllUsers: true,
+      mailData: null,
+      name: 'Mailing'
     }
   },
   methods: {
     selectUsers () {
-      this.$router.push({ path: '/admin/mailing-select-user' })
+      this.$emit('change-select-list', 'Mail')
+    },
+    addFile (event) {
+      this.mailData = event.target.files[0]
+      console.log(this.mailData)
+    },
+    async addMailing () {
+      console.log('Hello')
+      const id = await Module.getCounter()
+      console.log(id)
+      const linkFile = await Module.addFile(this.name, id, this.mailData)
+      console.log(linkFile)
+      if (this.selectAllUsers) {
+        await Module.addMailing(this.name, id, 'Mail', { ...this.allUsers, link: linkFile })
+        await Module.addCounter()
+      } else if (!this.selectAllUsers && this.users.length) {
+        await Module.addMailing(this.name, id, 'Mail', { ...this.users, link: linkFile })
+        await Module.addCounter()
+      } else {
+        alert('Select user!')
+      }
+      alert('Your message go to DB!')
+      this.selectAllUsers = true
+      this.SMS = ''
     }
   },
   computed: {
     lengthOfSMS () {
       return this.maxSMS - this.SMS.length
+    },
+    lengthArrOfUsers () {
+      if (this.selectAllUsers) {
+        return this.allUsers.length
+      } else {
+        return this.users.length
+      }
     }
+  },
+  mounted () {
+    if (this.users.length) this.selectAllUsers = false
   }
 }
 </script>
