@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
-      <div class="container not-margin">
-        <router-link to='/main' class="navbar-brand">
+      <div class="container not-margin border border-info">
+        <router-link to='/login' class="navbar-brand">
           <span class="brand-text font-weight-light">KinoCMS</span>
         </router-link>
         <div class="d-flex flex-column col-10">
@@ -20,28 +20,33 @@
             <ul class="navbar-nav ml-5">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fab fa-facebook-square"></i>
+                  <i class="fab fa-facebook-square fa-lg"></i>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fab fa-twitter-square"></i>
+                  <i class="fab fa-twitter-square fa-lg"></i>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fab fa-vk"></i>
+                  <i class="fab fa-vk fa-lg"></i>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fab fa-instagram-square"></i>
+                  <i class="fab fa-instagram-square fa-lg"></i>
                 </a>
               </li>
             </ul>
             <div class="ml-5">
               <div class="">(048) 777-77-77</div>
               <div class="">(097) 777-77-77</div>
+            </div>
+            <div class="ml-5 d-flex align-items-center">
+              <router-link to="/login" class="login">
+                <h4>USER</h4>
+              </router-link>
             </div>
           </div>
           <div class="d-flex justify-content-end">
@@ -72,6 +77,15 @@
                 </ul>
               </li>
             </ul>
+            <div class="ml-5 d-flex flex-column">
+              <toggle-button
+                :value="true"
+                id="localice"
+                :labels="{checked: lang, unchecked: lang}"
+                :color="{checked: 'blue', unchecked: 'red'}"
+                :switch-color="{checked: 'yellow', unchecked: 'white'}"
+                @change="changeLang"/>
+            </div>
           </div>
         </div>
       </div>
@@ -79,9 +93,29 @@
   </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      lang: 'UAH'
+    }
+  },
+  computed: {
+  },
+  methods: {
+    changeLang () {
+      this.lang === 'UAH' ? this.lang = 'RUS' : this.lang = 'UAH'
+    }
+  }
+}
+</script>
+
 <style scoped>
   .not-margin {
     max-width: 1000px;
     margin: 0 auto
+  }
+  .login {
+    color: black
   }
 </style>

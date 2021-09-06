@@ -6,6 +6,7 @@ import store from './store'
 
 import { firestorePlugin } from 'vuefire'
 import localizeFilter from '@/filters/localize.filter'
+import ToggleButton from 'vue-js-toggle-button'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -18,6 +19,7 @@ Vue.config.productionTip = false
 
 Vue.component('Paginate', Paginate)
 Vue.use(firestorePlugin)
+Vue.use(ToggleButton)
 Vue.filter('localize', localizeFilter)
 
 firebase.initializeApp({
