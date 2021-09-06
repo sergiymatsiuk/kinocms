@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/main',
+    path: '/',
     name: 'Main',
     meta: { layout: 'user' },
     component: () => import('../views/Main.vue')
@@ -113,7 +113,7 @@ const routes = [
     component: () => import('../views/ActionPages.vue')
   },
   {
-    path: '/',
+    path: '/admin/statistics',
     name: 'Statistics',
     meta: { layout: 'admin' },
     component: () => import('../views/Statistics.vue')

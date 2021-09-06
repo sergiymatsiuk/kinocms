@@ -8,7 +8,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <router-link to="/" class="nav-link">
+            <router-link to="/admin/statistics" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>Статистика</p>
             </router-link>
