@@ -8,7 +8,7 @@
         <div class="card-body">
           <form action="../../index3.html" method="post">
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" class="form-control" placeholder="Email" v-model="email">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" suggested="current-password" placeholder="Password">
+              <input type="password" class="form-control" suggested="current-password" placeholder="Password" v-model="password">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -25,7 +25,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <router-link to="/" type="submit" class="btn btn-info btn-block">Вхід</router-link>
+                <button type="submit" class="btn btn-info btn-block" @click.prevent="clickToLogin">Вхід</button>
               </div>
             </div>
           </form>
@@ -37,3 +37,31 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async clickToLogin () {
+      if (!this.email || !this.password) {
+        alert('Заповніть форму!')
+        return
+      }
+      console.log(this.email, this.password)
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+      try {
+        await this.$store.dispatch('login', formData)
+        this.$router.push({ path: '/' })
+      } catch (e) {}
+    }
+  }
+}
+</script>

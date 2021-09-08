@@ -10,6 +10,7 @@ import ToggleButton from 'vue-js-toggle-button'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
+import 'firebase/auth'
 import 'firebase/database'
 
 import '@/../public/dist/css/adminlte.min.css'
@@ -36,8 +37,14 @@ export const rtdb = firebase.database()
 export const db = firebase.firestore()
 export const fs = firebase.storage()
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+let app
+
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+})

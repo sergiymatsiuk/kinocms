@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import action from './action'
 import counter from './counter'
 import main from './main'
+import auth from './auth'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    action, counter, main
+    action, counter, main, auth
   }
 })
