@@ -4,7 +4,9 @@ import 'firebase/storage'
 
 export default {
   state: {
-    info: {}
+    info: {
+      locale: 'ukr-UKR'
+    }
   },
   mutations: {
     setInfo (state, info) {

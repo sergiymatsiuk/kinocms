@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
       <div class="container not-margin border border-info">
         <router-link to='/login' class="navbar-brand ml-2">
-          <span class="brand-text font-weight-700"><h4>KinoCMS</h4></span>
+          <span class="brand-text font-weight-700" @click.prevent="logout"><h4>KinoCMS</h4></span>
         </router-link>
         <div class="d-flex flex-column col-10">
           <div class="d-flex justify-content-end">
@@ -43,37 +43,40 @@
               <div class="">(048) 777-77-77</div>
               <div class="">(097) 777-77-77</div>
             </div>
-            <div class="ml-5 d-flex align-items-center">
-              <router-link to="/login" class="login">
-                <h5>ВХОД</h5>
-              </router-link>
+            <div class="d-flex align-items-center justify-content-center col-1 ml-5">
+              <a v-if="nickname"><h5>{{nickname}}</h5></a>
+              <router-link v-else to="/login" style="color: black"><h5>{{ 'Exit' | localize }}</h5></router-link>
             </div>
           </div>
           <div class="d-flex justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="#" class="nav-link">Афиша</a>
+                <a href="#" class="nav-link">{{ 'Poster' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Расписание</a>
+                <a href="#" class="nav-link">{{ 'Schedule' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Скоро</a>
+                <a href="#" class="nav-link">{{ 'Soon' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Кинотеатры</a>
+                <a href="#" class="nav-link">{{ 'Cinemas' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Акции</a>
+                <a href="#" class="nav-link">{{ 'Actions' | localize }}</a>
               </li>
               <li class="nav-item dropdown">
-                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">О кинотеатре</a>
+                <a id="dropdownSubMenu1"
+                  href="#" data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  class="nav-link dropdown-toggle">{{ 'AboutCinema' | localize }}</a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                  <li><a href="#" class="dropdown-item">Новости</a></li>
-                  <li><a href="#" class="dropdown-item">Реклама</a></li>
-                  <li><a href="#" class="dropdown-item">Кафе</a></li>
-                  <li><a href="#" class="dropdown-item">Мобильные прил</a></li>
-                  <li><a href="#" class="dropdown-item">Контакты</a></li>
+                  <li><a href="#" class="dropdown-item">{{ 'News' | localize }}</a></li>
+                  <li><a href="#" class="dropdown-item">{{ 'Advertising' | localize }}</a></li>
+                  <li><a href="#" class="dropdown-item">{{ 'Cafe' | localize }}</a></li>
+                  <li><a href="#" class="dropdown-item">{{ 'MobApp' | localize }}</a></li>
+                  <li><a href="#" class="dropdown-item">{{ 'Contacts' | localize }}</a></li>
                 </ul>
               </li>
             </ul>
@@ -95,6 +98,12 @@
 
 <script>
 export default {
+  props: {
+    nickname: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       lang: 'UAH'
@@ -103,8 +112,17 @@ export default {
   computed: {
   },
   methods: {
-    changeLang () {
+    async changeLang () {
       this.lang === 'UAH' ? this.lang = 'RUS' : this.lang = 'UAH'
+      const lang = this.lang === 'UAH' ? 'ukr-UKR' : 'rus-RUS'
+      await this.$store.dispatch('changeLocale', lang)
+    },
+    async logout () {
+      await this.$store.dispatch('logout')
+      console.log(this.$store.getters.userInfo)
+    },
+    clickToLogin () {
+      this.$router.push({ path: '/login' })
     }
   }
 }

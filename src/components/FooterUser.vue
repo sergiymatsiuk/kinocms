@@ -4,7 +4,7 @@
       <div class="container not-margin border-top border-info pt-3">
         <div class="footer-app col-4 d-flex flex-column justify-content-start">
           <div class="d-flex justify-content-center">
-            <h5 style="color: rgba(0,0,0,.5)">Мобильные приложения</h5>
+            <h5 style="color: rgba(0,0,0,.5)">{{ 'MobApp' | localize }}</h5>
           </div>
           <div class="d-flex mt-4 justify-content-center">
             <a href="#" class="mr-4">
@@ -19,38 +19,38 @@
           <div class="d-flex flex-column">
             <ul class="d-flex flex-column navbar-nav">
               <li class="nav-item">
-                <a class="nav-link"><h5>Афиша</h5></a>
+                <a class="nav-link"><h5>{{ 'Poster' | localize }}</h5></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Расписание</a>
+                <a class="nav-link">{{ 'Schedule' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Скоро в прокате</a>
+                <a class="nav-link">{{ 'Soon' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Кинотеатры</a>
+                <a class="nav-link">{{ 'Cinemas' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Акции</a>
+                <a class="nav-link">{{ 'Actions' | localize }}</a>
               </li>
             </ul>
           </div>
           <div class="d-flex flex-column">
             <ul class="d-flex flex-column navbar-nav">
               <li class="nav-item">
-                <a class="nav-link"><h5>О кинотеатре</h5></a>
+                <a class="nav-link"><h5>{{ 'AboutCinema' | localize }}</h5></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Новости</a>
+                <a class="nav-link">{{ 'News' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Реклама</a>
+                <a class="nav-link">{{ 'Advertising' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Кафе-Бар</a>
+                <a class="nav-link">{{ 'Cafe' | localize }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Контакты</a>
+                <a class="nav-link">{{ 'MobApp' | localize }}</a>
               </li>
             </ul>
           </div>
