@@ -2,6 +2,9 @@
   <div class="custom-container">
     <Loader v-if="loading"/>
     <form class="form-horizontal"  v-else>
+      <div class="d-flex justify-content-center mb-5 mt-5">
+        <router-link to="/admin/statistics" type="submit" class="btn btn-info col-sm-6">{{'ToAdmin' | localize}}</router-link>
+      </div>
       <div class="card-body row mt-5">
         <div class="form-group column col-6">
           <div class="col row">
@@ -164,7 +167,9 @@ export default {
   },
   methods: {
     async saveUser () {
-      console.log(this.user)
+      this.loading = true
+      await this.$store.dispatch('AddUserInfo', this.user)
+      this.loading = false
     }
   },
   computed: {

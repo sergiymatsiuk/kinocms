@@ -12,16 +12,21 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#" role="button">
+        <router-link to="/user-page" class="nav-link" role="button">
           <i class="nav-icon fas fa-user"></i>
-          Мой кабинет
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-slide="true" href="#" role="button">
-          <i class="nav-icon fas fa-power-off"></i>
-        </a>
+          {{ nickname }}
+        </router-link>
       </li>
     </ul>
   </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    nickname () {
+      return this.$store.getters.userInfo.nickname
+    }
+  }
+}
+</script>

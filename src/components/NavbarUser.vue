@@ -118,8 +118,8 @@ export default {
       await this.$store.dispatch('changeLocale', lang)
     },
     async logout () {
+      this.$router.push({ path: '/' })
       await this.$store.dispatch('logout')
-      console.log(this.$store.getters.userInfo)
     },
     clickToLogin () {
       this.$router.push({ path: '/login' })

@@ -17,9 +17,15 @@ export default {
       const uid = await dispatch('getUid')
       if (uid) {
         const userInfo = (await firebase.database().ref(`/Users/${uid}`).once('value')).val()
-        console.log(userInfo)
         commit('setUserInfo', userInfo)
       }
+    },
+    async AddUserInfo ({ dispatch }, user) {
+      const uid = await dispatch('getUid')
+      console.log(uid)
+      console.log(user)
+      await firebase.database().ref(`/Users/${uid}`).set(user)
+      dispatch('fetchInfo')
     }
   },
   getters: {
