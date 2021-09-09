@@ -17,7 +17,7 @@
                 </div>
               </div>
             </form>
-            <ul class="navbar-nav ml-5">
+            <ul class="navbar-nav ml-5 mt-1">
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fab fa-facebook-square fa-lg"></i>

@@ -116,7 +116,7 @@
             </div>
           </div>
           <div class="col row">
-            <label class="col-4 col-form-label"><h6>{{'Date' | localize}}</h6></label>
+            <label class="col-4 col-form-label"><h6>{{'DateBD' | localize}}</h6></label>
             <div class="input-group date col-8">
                 <input type="date" class="form-control datetimepicker-input" v-model="user.dateBD"/>
             </div>
