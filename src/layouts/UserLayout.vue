@@ -34,7 +34,7 @@ export default {
     }
   },
   async mounted () {
-    await this.$store.dispatch('fetchInfo')
+    await this.$store.dispatch('fetchUserInfo')
     this.loading = false
   }
 }

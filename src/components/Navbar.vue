@@ -23,6 +23,10 @@
 
 <script>
 export default {
+  data () {
+    return {
+    }
+  },
   computed: {
     nickname () {
       return this.$store.getters.userInfo.nickname

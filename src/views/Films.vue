@@ -82,6 +82,7 @@ export default {
   async mounted () {
     this.id = await this.$store.dispatch('getCounter')
     const filmsFromDatabase = await this.$store.dispatch('fetchInfo', this.title)
+    console.log(filmsFromDatabase)
     filmsFromDatabase.forEach(el => {
       el.lang === 'UA' ?
         el.UA.soon ? this.soonFilms.push({ ...el.UA, id: el.id }) : this.films.push({ ...el.UA, id: el.id }) :

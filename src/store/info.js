@@ -13,7 +13,7 @@ export default {
     }
   },
   actions: {
-    async fetchInfo ({ dispatch, commit }) {
+    async fetchUserInfo ({ dispatch, commit }) {
       const uid = await dispatch('getUid')
       if (uid) {
         const userInfo = (await firebase.database().ref(`/Users/${uid}`).once('value')).val()
