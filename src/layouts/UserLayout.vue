@@ -1,22 +1,27 @@
 <template>
-  <div class="wrapper">
-    <NavbarUser
-      :nickname="nickname"/>
-    <router-view />
-    <FooterUser />
+  <div>
+    <Loader v-if="loading"/>
+    <div class="wrapper" v-else>
+      <NavbarUser
+        :nickname="nickname"/>
+      <router-view />
+      <FooterUser />
+    </div>
   </div>
 </template>
 
 <script>
 import NavbarUser from '@/components/NavbarUser'
 import FooterUser from '@/components/FooterUser'
+import Loader from '@/components/Loader'
 
 export default {
   components: {
-    NavbarUser, FooterUser
+    NavbarUser, FooterUser, Loader
   },
   data () {
     return {
+      loading: true
     }
   },
   computed: {
@@ -30,6 +35,7 @@ export default {
   },
   async mounted () {
     await this.$store.dispatch('fetchInfo')
+    this.loading = false
   }
 }
 </script>
