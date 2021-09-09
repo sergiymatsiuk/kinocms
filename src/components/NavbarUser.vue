@@ -44,7 +44,7 @@
               <div class="">(097) 777-77-77</div>
             </div>
             <div class="d-flex align-items-center justify-content-center col-1 ml-5">
-              <a v-if="nickname"><h5>{{nickname}}</h5></a>
+              <router-link to="/user-page" v-if="nickname" style="color: black"><h5>{{nickname}}</h5></router-link>
               <router-link v-else to="/login" style="color: black"><h5>{{ 'Exit' | localize }}</h5></router-link>
             </div>
           </div>
