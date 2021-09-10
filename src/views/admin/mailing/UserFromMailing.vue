@@ -1,18 +1,17 @@
 <template>
   <div class="card card-info">
     <div class="align-self-center mb-3 mt-3">
-      <h2>Пользователи</h2>
       <div
         class="position-absolute"
         style="width: 200px">
         <input type="text" placeholder="поиск" v-model="search">
       </div>
     </div>
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" class="m-5"/>
     <div v-else>
-      <TableUsers
+      <TableUserMailing
         :arrUsers="userBySearch"
-        @delete-user-by-id="deleteUser"
+        @changeList="changeUserList"
         @sort-by-id="selectFilter='id'"
         @sort-by-city="selectFilter='city'"
         @sort-by-BD="selectFilter='dateBD'"
@@ -28,6 +27,9 @@
         :page-class="'page-item page-link'"
       />
     </div>
+    <div class="align-self-center mb-3 mt-3">
+      <button type="submit" class="btn btn-info col" style="width: 300px" @click.prevent="selectUserList">Отправить выбранным пользователям</button>
+    </div>
   </div>
 </template>
 
@@ -35,11 +37,11 @@
 /* eslint-disable */
 import Loader from '@/components/Loader'
 import Module from '@/module/module'
-import TableUsers from '@/views/users/TableUsers'
+import TableUserMailing from '@/views/admin/mailing/TableUserMailing'
 
 export default {
   components: {
-    Loader, TableUsers
+    Loader, TableUserMailing
   },
   data () {
     return {
@@ -52,8 +54,6 @@ export default {
       selectFilter: 'id',
       userInPage: 5,
       userPage: 1,
-
-
     }
   },
   methods: {
@@ -63,11 +63,18 @@ export default {
       this.users = await Module.fetchInfo(this.name)
       this.loading = false
     },
-
     pageChangeHandler (page) {
       this.userPage = page || 1
-      console.log(this.userPage)
     },
+    changeUserList (idSelectUser) {
+      console.log(idSelectUser)
+      this.users.forEach(el => {
+        if (idSelectUser === el.id) el.select = true
+      })
+    },
+    selectUserList () {
+      this.$emit('select-user', this.selectUser)
+    }
   },
   computed: {
     userByFilter () {
@@ -80,7 +87,6 @@ export default {
       if (this.selectFilter === 'city') changeUsers.sort((a, b) => { return a.city.toLowerCase() <= b.city.toLowerCase() ? -1 : 1 })
 
       if (this.selectFilter === 'name') changeUsers.sort((a, b) => { return a.lastName.toLowerCase() <= b.lastName.toLowerCase() ? -1 : 1 })
-      console.log(changeUsers)
       return changeUsers
         .filter( user => {
         let fullName = user.name +''+user.lastName
@@ -90,10 +96,18 @@ export default {
     userBySearch () {
       return this.userByFilter.slice((this.userPage*this.userInPage-this.userInPage), (this.userPage*this.userInPage))
     },
+    selectUser () {
+      return this.users.filter(el => {
+        return el.select === true
+      })
+    }
   },
   async mounted () {
     this.id = await Module.getCounter()
     this.users = await Module.fetchInfo(this.name)
+    this.users.forEach(el => {
+      el.select = false
+    })
     this.loading = false
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
-      <div class="container not-margin border border-info">
+      <div class="container not-margin border border-info rounded">
         <router-link to='/login' class="navbar-brand ml-2">
           <span class="brand-text font-weight-700" @click.prevent="logout"><h4>KinoCMS</h4></span>
         </router-link>
@@ -51,13 +51,13 @@
           <div class="d-flex justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Poster' | localize }}</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Schedule' | localize }}</a>
+                <router-link to="/poster" href="#" class="nav-link">{{ 'Poster' | localize }}</router-link>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">{{ 'Soon' | localize }}</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">{{ 'Schedule' | localize }}</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">{{ 'Cinemas' | localize }}</a>

@@ -81,7 +81,7 @@
 
 import Loader from '@/components/Loader'
 import Module from '@/module/module'
-import CinemasPage from '@/views/pages/CinemasPage'
+import CinemasPage from '@/views/admin/pages/CinemasPage'
 
 export default {
   components: {

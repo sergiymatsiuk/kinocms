@@ -4,7 +4,7 @@
     <div class="wrapper" v-else>
       <Navbar />
       <Sidebar />
-      <router-view class="content-wrapper"/>
+      <router-view/>
     </div>
   </div>
 </template>

@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import MailingSMS from '@/views/mailing/MailingSMS'
-import MailingEmail from '@/views/mailing/MailingEmail'
-import UserFromMalling from '@/views/mailing/UserFromMailing'
+import MailingSMS from '@/views/admin/mailing/MailingSMS'
+import MailingEmail from '@/views/admin/mailing/MailingEmail'
+import UserFromMalling from '@/views/admin/mailing/UserFromMailing'
 import Module from '@/module/module'
 import Loader from '@/components/Loader'
 
