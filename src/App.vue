@@ -10,6 +10,7 @@
 import EmptyLayout from '@/layouts/EmptyLayout'
 import AdminLayout from '@/layouts/AdminLayout'
 import UserLayout from '@/layouts/UserLayout'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -20,10 +21,24 @@ export default {
     EmptyLayout, AdminLayout, UserLayout
   },
   computed: {
-    layout  () {
+    layout () {
       console.log(this.$route.meta)
       return (this.$route.meta.layout || 'empty') + '-layout'
-    }
+    },
+    ...mapGetters({
+      cinemaInfo: 'cinemaInfo',
+      hallInfo: 'hallInfo',
+      })
+  },
+  watch: {
+    cinemaInfo () {
+      const lastCinema = JSON.stringify(this.cinemaInfo)
+      localStorage.setItem('lastCinema', lastCinema)
+    },
+    hallInfo () {
+      const lastHall = JSON.stringify(this.hallInfo)
+      localStorage.setItem('lastHall', lastHall)
+    },
   }
 }
 </script>

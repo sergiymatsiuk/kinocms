@@ -127,6 +127,24 @@ export default {
       console.log(e)
     }
   },
+    // HALLS
+  async fetchInfoHallsById (title, id, cinemaId) {
+    try {
+      const info = (await firebase.database().ref(`/${title}/${cinemaId}`).child(id).once('value')).val() || {}
+      const newInfo = { ...info, id }
+      return newInfo
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async fetchHallsById (title, id) {
+    try {
+      const info = (await firebase.database().ref(`/${title}`).child(id).once('value')).val() || {}
+      return Object.keys(info).map(key => ({ ...info[key], id: key }))
+    } catch (e) {
+      console.log(e)
+    }
+  },
 
     // MAILING
   async addMailing (title, id, type, item) {

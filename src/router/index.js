@@ -17,6 +17,36 @@ const routes = [
     component: () => import('../views/Poster.vue')
   },
   {
+    path: '/soon-film',
+    name: 'SoonFilm',
+    meta: { layout: 'user' },
+    component: () => import('../views/SoonFilm.vue')
+  },
+  {
+    path: '/cinemas',
+    name: 'Cinemas',
+    meta: { layout: 'user' },
+    component: () => import('../views/Cinemas.vue')
+  },
+  {
+    path: '/cinema/:id',
+    name: 'CinemaPage',
+    meta: { layout: 'user' },
+    component: () => import('../views/CinemaPage.vue')
+  },
+  {
+    path: '/cinema/hall/:id',
+    name: 'HallPage',
+    meta: { layout: 'user' },
+    component: () => import('../views/HallPage.vue')
+  },
+  {
+    path: '/actions',
+    name: 'Actions',
+    meta: { layout: 'user' },
+    component: () => import('../views/Actions.vue')
+  },
+  {
     path: '/user-page',
     name: 'User-Page',
     meta: { layout: 'user' },

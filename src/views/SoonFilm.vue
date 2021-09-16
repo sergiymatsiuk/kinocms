@@ -47,7 +47,7 @@ export default {
     return {
       loading: true,
       title: 'Films',
-      poster: true,
+      poster: false,
       filmDetaile: false,
 
       films: [],

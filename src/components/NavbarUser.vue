@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper z-idx">
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
       <div class="container not-margin border border-info rounded">
         <router-link to='/login' class="navbar-brand ml-2">
@@ -54,16 +54,16 @@
                 <router-link to="/poster" href="#" class="nav-link">{{ 'Poster' | localize }}</router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Soon' | localize }}</a>
+                <router-link to="/soon-film" class="nav-link">{{ 'Soon' | localize }}</router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Schedule' | localize }}</a>
+                <router-link to="/actions" href="#" class="nav-link">{{ 'Schedule' | localize }}</router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Cinemas' | localize }}</a>
+                <router-link to="/cinemas" class="nav-link">{{ 'Cinemas' | localize }}</router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">{{ 'Actions' | localize }}</a>
+                <router-link to="/actions" class="nav-link">{{ 'Actions' | localize }}</router-link>
               </li>
               <li class="nav-item dropdown">
                 <a id="dropdownSubMenu1"
@@ -135,5 +135,8 @@ export default {
   }
   .login {
     color: black
+  }
+  .z-idx {
+    z-index: 10;
   }
 </style>
