@@ -59,6 +59,12 @@ const routes = [
     component: () => import('../views/AboutCinema.vue')
   },
   {
+    path: '/cafe',
+    name: 'Cafe',
+    meta: { layout: 'user' },
+    component: () => import('../views/Cafe.vue')
+  },
+  {
     path: '/user-page',
     name: 'User-Page',
     meta: { layout: 'user' },

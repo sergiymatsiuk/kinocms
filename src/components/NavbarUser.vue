@@ -76,7 +76,8 @@
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                   <li><a href="#" class="dropdown-item">{{ 'News' | localize }}</a></li>
                   <li><a href="#" class="dropdown-item">{{ 'Advertising' | localize }}</a></li>
-                  <li><a href="#" class="dropdown-item">{{ 'Cafe' | localize }}</a></li>
+                  <li><router-link to="/cafe" class="dropdown-item">{{ 'Cafe' | localize }}</router-link></li>
+                  <li><router-link to="/vip-hall" class="dropdown-item">{{ 'Vip' | localize }}</router-link></li>
                   <li><a href="#" class="dropdown-item">{{ 'MobApp' | localize }}</a></li>
                   <li><a href="#" class="dropdown-item">{{ 'Contacts' | localize }}</a></li>
                 </ul>
