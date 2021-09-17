@@ -65,7 +65,7 @@
               <li class="nav-item">
                 <router-link to="/actions" class="nav-link">{{ 'Actions' | localize }}</router-link>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown z-idx">
                 <a id="dropdownSubMenu1"
                   href="#" data-toggle="dropdown"
                   aria-haspopup="true"

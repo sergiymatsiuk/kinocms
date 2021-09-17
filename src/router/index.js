@@ -47,6 +47,12 @@ const routes = [
     component: () => import('../views/Actions.vue')
   },
   {
+    path: '/action-page/:id',
+    name: 'ActionPage',
+    meta: { layout: 'user' },
+    component: () => import('../views/ActionPage.vue')
+  },
+  {
     path: '/user-page',
     name: 'User-Page',
     meta: { layout: 'user' },

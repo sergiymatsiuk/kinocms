@@ -9,8 +9,11 @@
       </div>
       <div class="m-5 row">
         <div class="col-10">
-          <user-list
-            :items="actions"/>
+          <h2 class="mb-2">{{showAction.name}}</h2>
+          <p class="item-desc">{{showAction.description}}</p>
+          <div class="mb-2">
+            <img class="card-img-top" :src="showAction.mainImg" style="height: 100%">
+          </div>
         </div>
         <div class="col-2">
           <div class="rounded d-flex align-items-center justify-content-center mb-4" style="height: 350px; background-color: #D3D3D3">
@@ -28,30 +31,46 @@
 <script>
 import Module from '@/module/module'
 import Loader from '@/components/Loader'
-import UserList from '@/components/UserList'
 
 export default {
   components: {
-    Loader, UserList
+    Loader
   },
   data () {
     return {
       loading: true,
       banners: [],
-      actions: []
+      action: {}
     }
   },
   computed: {
     showBanner () {
       if (this.banners.length === 0) return
       return this.banners[0].img
+    },
+    showAction () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.action.RU
+      } else {
+        return this.action.UA
+      }
     }
   },
   async mounted () {
     this.banners = await Module.fetchInfoBanner('Banner', 'bannerNews')
-    this.actions = await Module.fetchInfo('Actions')
-    console.log(this.actions)
+    const id = this.$route.params.id
+    this.action = await Module.fetchInfoById('Actions', id)
+    console.log(this.action)
     this.loading = false
   }
 }
 </script>
+
+<style scoped>
+  .item-desc {
+    margin: 20px auto 0;
+    width: 80%;
+    font-size: 20px;
+  }
+</style>

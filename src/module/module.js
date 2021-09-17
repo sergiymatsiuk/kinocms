@@ -206,7 +206,6 @@ export default {
   },
   async addPageCinemaById (title, item, lang, id) {
     try {
-      console.log(item)
       for (let i = 0; i < item.length; i++) {
         await firebase.storage().ref(`${title}/${id}/${lang}/Cinemas/${item[i].id}`).put(item[i].imgData).then(
           async (snapshot) => {
