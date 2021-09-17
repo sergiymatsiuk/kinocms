@@ -4,7 +4,7 @@
     style="width: 45%; height: 300px"
     @click.prevent="clickToItem">
     <img class="card-img-top" :src="showItem.mainImg" style="height: 100%">
-    <h2 class="mx-2">{{showItem.name}}</h2>
+    <h2 class="my-3">{{showItem.name}}</h2>
     <p>{{showItem.description}}</p>
   </div>
 </template>

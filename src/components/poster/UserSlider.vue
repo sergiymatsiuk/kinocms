@@ -3,7 +3,7 @@
     <splide-slide
       v-for="(img, idx) in imgsToShow"
       :key="idx">
-      <img :src="img">
+      <img :src="img" style="width: 100%">
     </splide-slide>
   </splide>
 </template>
@@ -28,7 +28,6 @@ export default {
       options: {
         width: 'auto',
         rewind: true,
-        autoWidth: true,
         type: 'loop',
         trimSpace: false,
         gap: '20px'

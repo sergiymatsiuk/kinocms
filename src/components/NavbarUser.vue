@@ -66,11 +66,13 @@
                 <router-link to="/actions" class="nav-link">{{ 'Actions' | localize }}</router-link>
               </li>
               <li class="nav-item dropdown z-idx">
-                <a id="dropdownSubMenu1"
-                  href="#" data-toggle="dropdown"
+                <router-link
+                  to="/about-cinema"
+                  id="dropdownSubMenu1"
+                  data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  class="nav-link dropdown-toggle">{{ 'AboutCinema' | localize }}</a>
+                  class="nav-link dropdown-toggle">{{ 'AboutCinema' | localize }}</router-link>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                   <li><a href="#" class="dropdown-item">{{ 'News' | localize }}</a></li>
                   <li><a href="#" class="dropdown-item">{{ 'Advertising' | localize }}</a></li>

@@ -53,6 +53,12 @@ const routes = [
     component: () => import('../views/ActionPage.vue')
   },
   {
+    path: '/about-cinema',
+    name: 'AboutCinema',
+    meta: { layout: 'user' },
+    component: () => import('../views/AboutCinema.vue')
+  },
+  {
     path: '/user-page',
     name: 'User-Page',
     meta: { layout: 'user' },
