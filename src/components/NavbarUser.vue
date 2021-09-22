@@ -74,23 +74,17 @@
                   aria-expanded="false"
                   class="nav-link dropdown-toggle">{{ 'AboutCinema' | localize }}</router-link>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                  <li><a href="#" class="dropdown-item">{{ 'News' | localize }}</a></li>
-                  <li><a href="#" class="dropdown-item">{{ 'Advertising' | localize }}</a></li>
+                  <li><router-link to="/news" class="dropdown-item">{{ 'News' | localize }}</router-link  ></li>
+                  <li><router-link to="/advertising" class="dropdown-item">{{ 'Advertising' | localize }}</router-link></li>
                   <li><router-link to="/cafe" class="dropdown-item">{{ 'Cafe' | localize }}</router-link></li>
                   <li><router-link to="/vip-hall" class="dropdown-item">{{ 'Vip' | localize }}</router-link></li>
-                  <li><a href="#" class="dropdown-item">{{ 'MobApp' | localize }}</a></li>
-                  <li><a href="#" class="dropdown-item">{{ 'Contacts' | localize }}</a></li>
+                  <li><router-link to="/app" class="dropdown-item">{{ 'MobApp' | localize }}</router-link></li>
+                  <li><router-link to="/contacts" class="dropdown-item">{{ 'Contacts' | localize }}</router-link></li>
                 </ul>
               </li>
             </ul>
             <div class="ml-5 d-flex flex-column">
-              <toggle-button
-                :value="true"
-                id="localice"
-                :labels="{checked: lang, unchecked: lang}"
-                :color="{checked: 'blue', unchecked: 'red'}"
-                :switch-color="{checked: 'yellow', unchecked: 'white'}"
-                @change="changeLang"/>
+              <lang-toggle />
             </div>
           </div>
         </div>
@@ -100,7 +94,12 @@
 </template>
 
 <script>
+import LangToggle from './LangToggle.vue'
+
 export default {
+  components: {
+    LangToggle
+  },
   props: {
     nickname: {
       type: String,
@@ -108,18 +107,10 @@ export default {
     }
   },
   data () {
-    return {
-      lang: 'UAH'
-    }
   },
   computed: {
   },
   methods: {
-    async changeLang () {
-      this.lang === 'UAH' ? this.lang = 'RUS' : this.lang = 'UAH'
-      const lang = this.lang === 'UAH' ? 'ukr-UKR' : 'rus-RUS'
-      await this.$store.dispatch('changeLocale', lang)
-    },
     async logout () {
       this.$router.push({ path: '/' })
       await this.$store.dispatch('logout')

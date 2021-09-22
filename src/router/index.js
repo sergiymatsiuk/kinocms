@@ -65,6 +65,36 @@ const routes = [
     component: () => import('../views/Cafe.vue')
   },
   {
+    path: '/vip-hall',
+    name: 'VipHall',
+    meta: { layout: 'user' },
+    component: () => import('../views/VipHall.vue')
+  },
+  {
+    path: '/news',
+    name: 'News',
+    meta: { layout: 'user' },
+    component: () => import('../views/News.vue')
+  },
+  {
+    path: '/advertising',
+    name: 'Advertising',
+    meta: { layout: 'user' },
+    component: () => import('../views/Advertising.vue')
+  },
+  {
+    path: '/app',
+    name: 'App',
+    meta: { layout: 'user' },
+    component: () => import('../views/App.vue')
+  },
+  {
+    path: '/contacts',
+    name: 'Contacts',
+    meta: { layout: 'user' },
+    component: () => import('../views/Contacts.vue')
+  },
+  {
     path: '/user-page',
     name: 'User-Page',
     meta: { layout: 'user' },
@@ -95,7 +125,7 @@ const routes = [
       },
       {
         path: 'cinemas',
-        name: 'Cinemas',
+        name: 'AdminCinemas',
         meta: { layout: 'admin' },
         component: () => import('../views/admin/cinemas/Cinemas.vue')
       },
@@ -131,7 +161,7 @@ const routes = [
       },
       {
         path: 'news',
-        name: 'News',
+        name: 'AdminNews',
         meta: { layout: 'admin' },
         component: () => import('../views/admin/news/News.vue')
       },
