@@ -1,6 +1,7 @@
 <template>
   <toggle-button
     :value="true"
+    v-model="toggle"
     id="localice"
     :labels="{checked: lang, unchecked: lang}"
     :color="{checked: 'blue', unchecked: 'red'}"
@@ -12,7 +13,8 @@
 export default {
   data () {
     return {
-      lang: 'UAH'
+      lang: 'UAH',
+      toggle: true
     }
   },
   methods: {
@@ -21,6 +23,10 @@ export default {
       const lang = this.lang === 'UAH' ? 'ukr-UKR' : 'rus-RUS'
       await this.$store.dispatch('changeLocale', lang)
     }
+  },
+  mounted () {
+    const lang = this.$store.getters.info.locale
+    lang === 'ukr-UKR' ? this.toggle = true : this.toggle = false
   }
 }
 </script>

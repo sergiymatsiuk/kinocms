@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <footer class="navbar navbar-expand-md navbar-light navbar-white">
-      <div class="container not-margin border-top border-info pt-3">
+      <div class="container not-margin">
         <div class="footer-app col-4 d-flex flex-column justify-content-start">
           <div class="d-flex justify-content-center">
             <h5 style="color: rgba(0,0,0,.5)">{{ 'MobApp' | localize }}</h5>

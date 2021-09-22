@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper z-idx">
     <nav class="navbar navbar-expand-md navbar-light navbar-white">
-      <div class="container not-margin border border-info rounded">
+      <div class="container not-margin">
         <router-link to='/login' class="navbar-brand ml-2">
           <span class="brand-text font-weight-700" @click.prevent="logout"><h4>KinoCMS</h4></span>
         </router-link>
@@ -84,7 +84,13 @@
               </li>
             </ul>
             <div class="ml-5 d-flex flex-column">
-              <lang-toggle />
+              <toggle-button
+                :value="true"
+                id="localice"
+                :labels="{checked: lang, unchecked: lang}"
+                :color="{checked: 'blue', unchecked: 'red'}"
+                :switch-color="{checked: 'yellow', unchecked: 'white'}"
+                @change="changeLang"/>
             </div>
           </div>
         </div>
@@ -94,12 +100,8 @@
 </template>
 
 <script>
-import LangToggle from './LangToggle.vue'
 
 export default {
-  components: {
-    LangToggle
-  },
   props: {
     nickname: {
       type: String,
@@ -107,10 +109,18 @@ export default {
     }
   },
   data () {
+    return {
+      lang: 'UAH'
+    }
   },
   computed: {
   },
   methods: {
+    async changeLang () {
+      this.lang === 'UAH' ? this.lang = 'RUS' : this.lang = 'UAH'
+      const lang = this.lang === 'UAH' ? 'ukr-UKR' : 'rus-RUS'
+      await this.$store.dispatch('changeLocale', lang)
+    },
     async logout () {
       this.$router.push({ path: '/' })
       await this.$store.dispatch('logout')

@@ -30,9 +30,13 @@ export default {
         rewind: true,
         type: 'loop',
         trimSpace: false,
-        gap: '20px'
+        gap: '20px',
+        autoplay: true,
+        interval: 2000
       }
     }
+  },
+  mounted () {
   }
 }
 </script>

@@ -89,5 +89,10 @@
   "SessionSchedule": "Розклад сеансів",
   "NumberHalls": "Кількість залів: ",
   "MapHall": "Карта залу",
-  "NoNews": "Новин немає..."
+  "NoNews": "Новин немає...",
+  "NewsAnd": "Новини та Акції",
+  "WatchSoon": "Скоро у перегляді",
+  "SoonFilmDate": "з 1 жовтня",
+  "WatchNow": "Зараз в прокаті",
+  "ByTicket": "Купити квиток"
 }

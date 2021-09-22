@@ -97,6 +97,11 @@ export default {
       return (await firebase.database().ref(`/${title}`).child(`${banner}`).get()).val()
     } catch (e) {}
   },
+  async fetchBackImage () {
+    try {
+      return (await firebase.database().ref(`/Banner/main banner`).child(`url`).get()).val()
+    } catch (e) {}
+  },
   
     // CINEMA
   async addHallById (title, item, lang, id, cinemaId) {
@@ -180,6 +185,14 @@ export default {
       console.log(e)
     }
   },
+  async fetchInfoByIdCinemas (title, id, name) {
+    try {
+      const info = (await firebase.database().ref(`/${title}/${id}/${name}`).once('value')).val() || {}
+      return Object.keys(info).map(el => ({ ...info[el], id: el}))
+    } catch (e) {
+      console.log(e)
+    }
+  },
 
   async deleteItem (title, id) {
     try {
@@ -195,27 +208,33 @@ export default {
       throw e
     }
   },
-  async addPageById (title, item, lang, id) {
+  async addPageById (title, item, id) {
     try {
-      await firebase.database().ref(`/${title}/${id}/${lang}/SEO`).set(item)
-      await firebase.database().ref(`/${title}/${id}/lang`).set(lang)
+      await firebase.database().ref(`/${title}/${id}/SEO`).set(item)
     } catch (e) {
       commit('setError', e)
       throw e
     }
   },
-  async addPageCinemaById (title, item, lang, id) {
+  async addCinemaLogo(id, mainImageData) {
+    try {
+      return await firebase.storage().ref(`Pages/528//Cinemas/${id}`).put(mainImageData).then(
+        async (snapshot) => {
+          return await snapshot.ref.getDownloadURL()
+        }
+      )
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async addPageCinemaById (title, item, id) {
     try {
       for (let i = 0; i < item.length; i++) {
-        await firebase.storage().ref(`${title}/${id}/${lang}/Cinemas/${item[i].id}`).put(item[i].imgData).then(
-          async (snapshot) => {
-            item[i].logo = await snapshot.ref.getDownloadURL()
-          }
-        )
-        await firebase.database().ref(`/${title}/${id}/${lang}/Cinemas/${item[i].id}`).set(item[i])
+        await firebase.database().ref(`/${title}/${id}/Cinemas/${item[i].id}`).set(item[i])
       }
     } catch (e) {}
   },
+  
   async addInfoByIdUsers (title, item, id) {
     try {
       await firebase.database().ref(`/${title}/${id}`).set(item)

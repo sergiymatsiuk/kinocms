@@ -2,6 +2,9 @@
   <div class="card card-info">
     <Loader v-if="loading"/>
     <form class="form-horizontal"  v-else>
+      <div class="d-flex flex-row-reverse">
+        <lang-toggle class="mt-5 mr-5"/>
+      </div>
       <div class="card-body">
         <CinemasPage
           v-for="cinema in cinemas"
@@ -10,7 +13,7 @@
           @changeCinemas="changeCinemas"
         />
         <div class="form-group column">
-          <div class="d-flex justify-content-center mb-4">
+          <div class="d-flex justify-content-center my-4">
             <button type="submit" class="btn btn-info col-sm-4" @click.prevent="addPages">{{'AddCinema' | localize}}</button>
           </div>
         </div>
@@ -27,7 +30,7 @@
                 class="form-control"
                 id="inputURL"
                 placeholder="URL"
-                v-model="SEO.SEOurl"
+                v-model="showSEO.SEOurl"
               />
             </div>
 
@@ -39,7 +42,7 @@
                 class="form-control"
                 id="inputTitle"
                 placeholder="Title"
-                v-model="SEO.SEOtitle"
+                v-model="showSEO.SEOtitle"
               />
             </div>
 
@@ -51,7 +54,7 @@
                 class="form-control"
                 id="inputKeywords"
                 placeholder="Word"
-                v-model="SEO.SEOkeywords"
+                v-model="showSEO.SEOkeywords"
               />
             </div>
 
@@ -63,7 +66,7 @@
                 class="form-control"
                 id="inputDescription"
                 placeholder="Description"
-                v-model="SEO.SEOdescription"
+                v-model="showSEO.SEOdescription"
               />
             </div>
           </div>
@@ -82,10 +85,11 @@
 import Loader from '@/components/Loader'
 import Module from '@/module/module'
 import CinemasPage from '@/views/admin/pages/CinemasPage'
+import LangToggle from '@/components/LangToggle'
 
 export default {
   components: {
-    Loader, CinemasPage
+    Loader, CinemasPage, LangToggle
   },
   data () {
     return {
@@ -99,7 +103,6 @@ export default {
       },
 
       loading: true,
-      id: 0,
       title: 'Pages',
       lang: 'RU'
     }
@@ -107,33 +110,56 @@ export default {
   methods: {
     addPages () {
       this.cinemas.push({
-        imgData: null,
-        address: '',
         id: Math.floor(Math.random()*10000),
-        logo: '',
-        map: '',
-        name: ''
+        RU: {
+          address: '',
+          logo: '',
+          map: '',
+          name: ''
+        },
+        UA: {
+          address: '',
+          logo: '',
+          map: '',
+          name: ''
+        }
       })
     },
     changeCinemas (item) {
-      this.newCinemas.push(item)
+      this.cinemas = this.cinemas.map(el => {
+        if (el.id !== item.id) {
+          return el
+        } else {
+          return item
+        }
+      })
+      console.log(this.cinemas)
     },
     async addCinemaToData () {
       this.loading = true
 
-      await Module.addPageById(this.title, this.SEO, this.lang, this.id)
+      await Module.addPageById(this.title, this.SEO, this.id)
 
-      await Module.addPageCinemaById(this.title, this.newCinemas, this.lang, this.id)
+      await Module.addPageCinemaById(this.title, this.cinemas, this.id)
 
       this.loading = false
     }
   },
+  computed: {
+    showSEO () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.SEO.RU
+      } else {
+        return this.SEO.UA
+      }
+    }
+  },
   async mounted () {
     this.id = this.$route.params.id
-    this.$store.dispatch('changeLocale', 'rus-RUS')
     const contactPage = await Module.fetchInfoById('Pages', this.id)
-    this.cinemas = Object.keys(contactPage.RU.Cinemas).map(key => ({ ...contactPage.RU.Cinemas[key], id: key }))
-    this.SEO = contactPage.RU.SEO
+    this.cinemas = Object.keys(contactPage.Cinemas).map(key => ({ ...contactPage.Cinemas[key], id: key }))
+    this.SEO = contactPage.SEO
     this.loading = false
   }
 }
