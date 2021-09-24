@@ -2,7 +2,9 @@
   <div class="custom-container">
     <loader v-if="loading"/>
     <div class="search-container" v-else>
+      <h2 v-if="films.length === 0">{{ 'NoFilms' | localize }}</h2>
       <search-card-film
+        v-else
         v-for="(film, idx) in searchSort"
         :key="idx"
         :film="film"/>
