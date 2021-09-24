@@ -1,9 +1,8 @@
 <template>
-  <div class="session-show">
+  <div class="session-show rounded">
     <h2 class="session-show-header">{{ 'TimeTable' | localize }}</h2>
     <timetable-session
-      :sessions="sessions"
-      @delete-session="deleteSession"/>
+      :sessions="sessions"/>
   </div>
 </template>
 
@@ -21,9 +20,6 @@ export default {
     TimetableSession
   },
   methods: {
-    deleteSession (id) {
-      this.$emit('delete-session', id)
-    }
   }
 }
 </script>
