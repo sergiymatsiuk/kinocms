@@ -25,6 +25,19 @@
       </select>
     </div>
     <div class="form-group">
+      <label>{{ 'Hall' | localize}}</label>
+      <select
+        class="form-control"
+        :disabled="!selectCinema"
+        v-model="selectHall">
+        <option
+          v-for="(hall, idx) in showHalls"
+          :key="idx"
+          :value="hall"
+          >{{hall.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label class="">{{'DateTimetable' | localize}}</label>
       <div class="date">
           <input type="date" class="form-control datetimepicker-input" v-model="date"/>
@@ -104,6 +117,47 @@ export default {
           return { ...el.UA, id: el.id }
         })
       }
+    },
+    //
+    selectHalls () {
+      if (this.selectCinema) {
+        return this.halls.filter(el => {
+          return el.id === this.selectCinema.id
+        })
+      } else {
+        return []
+      }
+    },
+    changeHalls () {
+      const arr = this.selectHalls[0]
+      if (!arr) {
+        return []
+      } else {
+        return Object.keys(arr).map(el => {
+          if (el === 'id') {
+            return {}
+          } else {
+            return { ...arr[el], id: el }
+          }
+        })
+      }
+    },
+    filterHalls () {
+      return this.changeHalls.filter(el => {
+        return Object.keys(el).length !== 0
+      })
+    },
+    showHalls () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.filterHalls.map(el => {
+          return { ...el.RU, id: el.id }
+        })
+      } else {
+        return this.filterHalls.map(el => {
+          return { ...el.UA, id: el.id }
+        })
+      }
     }
   },
   methods: {
@@ -125,9 +179,13 @@ export default {
       this.price = ''
     }
   },
+  watch: {
+    showCinemas () {
+      this.selectCinema = ''
+    }
+  },
   mounted () {
-    console.log(this.halls)
-    console.log(this.cinemas)
+    this.lang = this.$store.getters.info.locale
   }
 }
 </script>

@@ -7,6 +7,7 @@
           <th>{{ 'Time' | localize }}</th>
           <th>{{ 'Film' | localize }}</th>
           <th>{{ 'Cinema' | localize }}</th>
+          <th>{{ 'Hall' | localize }}</th>
           <th>{{ 'Price' | localize }}</th>
           <th></th>
         </tr>
@@ -17,6 +18,7 @@
           <td>{{session.time}}</td>
           <td>{{session.film.name}}</td>
           <td>{{session.cinema.name}}</td>
+          <td>{{session.hall.name}}</td>
           <td>{{session.price}}</td>
           <td class="text-right py-0 align-middle">
             <div class="btn-group btn-group-sm">
@@ -45,6 +47,7 @@ export default {
           return {
             id: el.id,
             cinema: el.cinema.RU,
+            hall: el.hall.RU,
             film: el.film.RU,
             date: el.date,
             time: el.time,
@@ -56,6 +59,7 @@ export default {
           return {
             id: el.id,
             cinema: el.cinema.UA,
+            hall: el.hall.UA,
             film: el.film.UA,
             date: el.date,
             time: el.time,

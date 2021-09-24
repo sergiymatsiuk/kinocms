@@ -44,7 +44,9 @@ export default {
     async addSession (item) {
       const cinema = await Module.fetchInfoById('Cinemas', item.selectCinema.id)
       const film = await Module.fetchInfoById('Films', item.selectFilm.id)
+      const hall = await Module.fetchInfoHallsById('Halls', item.selectHall.id, item.selectCinema.id)
       const newSession = {
+        hall,
         film,
         cinema,
         date: item.date,
