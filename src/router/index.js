@@ -17,10 +17,28 @@ const routes = [
     component: () => import('../views/Poster.vue')
   },
   {
+    path: '/search/:id',
+    name: 'Search',
+    meta: { layout: 'user' },
+    component: () => import('../views/Search.vue')
+  },
+  {
+    path: '/film-detaile/:id',
+    name: 'FilmDetaile',
+    meta: { layout: 'user' },
+    component: () => import('../views/FilmDetaile.vue')
+  },
+  {
     path: '/soon-film',
     name: 'SoonFilm',
     meta: { layout: 'user' },
     component: () => import('../views/SoonFilm.vue')
+  },
+  {
+    path: '/timetable',
+    name: 'Timetable',
+    meta: { layout: 'user' },
+    component: () => import('../views/Timetable.vue')
   },
   {
     path: '/cinemas',
@@ -122,6 +140,12 @@ const routes = [
         name: 'Banner',
         meta: { layout: 'admin' },
         component: () => import('../views/admin/banner/Banner.vue')
+      },
+      {
+        path: 'timetable',
+        name: 'AdminTimetable',
+        meta: { layout: 'admin' },
+        component: () => import('../views/admin/timetable/TimeTable.vue')
       },
       {
         path: 'cinemas',

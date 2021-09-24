@@ -234,7 +234,6 @@ export default {
       }
     } catch (e) {}
   },
-  
   async addInfoByIdUsers (title, item, id) {
     try {
       await firebase.database().ref(`/${title}/${id}`).set(item)
@@ -242,5 +241,17 @@ export default {
       commit('setError', e)
       throw e
     }
-  }
+  },
+
+  //  TIMETABLE
+  async addNewSession (item) {
+    try {
+      await firebase.database().ref('Timetable').push(item)
+    } catch (e) {}
+  },
+  async deleteSession (id) {
+    try {
+      await firebase.database().ref(`Timetable/${id}`).remove()
+    } catch (e) {}
+  }, 
 }

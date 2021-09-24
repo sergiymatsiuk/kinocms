@@ -44,6 +44,15 @@
           </li>
 
           <li class="nav-item">
+            <router-link to="/admin/timetable" class="nav-link">
+              <i class="nav-icon fas fa-circle"></i>
+              <p>
+                {{ 'TimeTable' | localize }}
+              </p>
+            </router-link>
+          </li>
+
+          <li class="nav-item">
             <router-link to="/admin/news" class="nav-link">
               <i class="nav-icon fas fa-circle"></i>
               <p>

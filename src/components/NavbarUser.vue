@@ -9,9 +9,9 @@
           <div class="d-flex justify-content-end">
             <form class="form-inline ml-0 ml-md-3">
               <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control form-control-navbar" type="text" placeholder="Search" aria-label="Search" v-model="search">
                 <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
+                  <button class="btn btn-navbar" type="submit" @click.prevent="goToSearch">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
@@ -57,7 +57,7 @@
                 <router-link to="/soon-film" class="nav-link">{{ 'Soon' | localize }}</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/actions" href="#" class="nav-link">{{ 'Schedule' | localize }}</router-link>
+                <router-link to="/timetable" href="#" class="nav-link">{{ 'Schedule' | localize }}</router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/cinemas" class="nav-link">{{ 'Cinemas' | localize }}</router-link>
@@ -110,7 +110,8 @@ export default {
   },
   data () {
     return {
-      lang: 'UAH'
+      lang: 'UAH',
+      search: ''
     }
   },
   computed: {
@@ -127,6 +128,10 @@ export default {
     },
     clickToLogin () {
       this.$router.push({ path: '/login' })
+    },
+    goToSearch () {
+      this.$router.push({ path: '/search/' + this.search })
+      this.search = ''
     }
   }
 }

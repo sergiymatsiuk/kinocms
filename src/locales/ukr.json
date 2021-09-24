@@ -94,5 +94,13 @@
   "WatchSoon": "Скоро у перегляді",
   "SoonFilmDate": "з 1 жовтня",
   "WatchNow": "Зараз в прокаті",
-  "ByTicket": "Купити квиток"
+  "ByTicket": "Купити квиток",
+
+  "TimeTable": "Розклад",
+  "Film": "Фільм",
+  "Cinema": "Кінотеатр",
+  "DateTimetable": "Дата",
+  "Price": "Ціна",
+  "Time": "Час",
+  "WatchDetaile": "Детальніше"
 }
