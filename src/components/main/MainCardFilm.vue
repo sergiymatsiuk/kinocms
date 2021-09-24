@@ -3,7 +3,8 @@
     <img
       class="card-film-img"
       :src="showFilm.mainImg"
-      :alt="showFilm.name">
+      :alt="showFilm.name"
+      @click.prevent="toFilmDetaile">
     <h5 class="card-film-header">{{showFilm.name}}</h5>
     <slot></slot>
   </div>
@@ -25,6 +26,11 @@ export default {
       } else {
         return this.film.RU
       }
+    }
+  },
+  methods: {
+    toFilmDetaile () {
+      this.$router.push({ path: '/film-detaile/' + this.film.id })
     }
   }
 }
