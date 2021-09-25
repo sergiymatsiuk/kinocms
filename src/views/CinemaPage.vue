@@ -15,6 +15,8 @@
           <UserCinemaHallsTable
             :halls="showHalls"
             @select-hall="selectHall"/>
+          <user-cinema-sessions-table
+            :sessions="showSessions"/>
         </div>
         <div class="col-10">
           <div class="mt-4 row justify-content-start">
@@ -25,9 +27,7 @@
               <img class="rounded-circle" :src="showCinema.mainImg" :alt="showCinema.name" style="height: 100px">
             </div>
             <div class="d-flex flex-column justify-content-center">
-              <button type="button" class="btn btn-info px-5">{{ 'SessionSchedule' | localize}}</button>
-              <div class="d-flex justify-content-start">
-              </div>
+              <router-link to="/timetable" type="button" class="btn btn-info px-5">{{ 'SessionSchedule' | localize}}</router-link>
             </div>
           </div>
           <div class="mt-4">
@@ -54,17 +54,22 @@
 import Loader from '@/components/Loader'
 import UserSlider from '@/components/poster/UserSlider'
 import UserCinemaHallsTable from '@/components/cinema/UserCinemaHallsTable'
+import UserCinemaSessionsTable from '@/components/cinema/UserCinemaSessionsTable'
 import Module from '@/module/module'
 
 export default {
   components: {
-    Loader, UserSlider, UserCinemaHallsTable
+    Loader,
+    UserSlider,
+    UserCinemaHallsTable,
+    UserCinemaSessionsTable
   },
   data () {
     return {
       loading: true,
       cinema: {},
-      halls: {}
+      halls: {},
+      sessions: []
     }
   },
   computed: {
@@ -94,6 +99,18 @@ export default {
           return acc
         }, [])
       }
+    },
+    showSessions () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.sessions.filter(el => {
+          return el.cinema.RU.name === this.showCinema.name
+        })
+      } else {
+        return this.sessions.filter(el => {
+          return el.cinema.UA.name === this.showCinema.name
+        })
+      }
     }
   },
   methods: {
@@ -113,6 +130,7 @@ export default {
       this.cinema = this.$store.getters.cinemaInfo
     }
     this.halls = await Module.fetchHallsById('Halls', this.cinema.id)
+    this.sessions = await Module.fetchInfo('Timetable')
     this.loading = false
   }
 }

@@ -12,6 +12,8 @@
           <div class="rounded d-flex align-items-center justify-content-center mb-4" style="height: 350px; background-color: #D3D3D3">
             <h3>Реклама</h3>
           </div>
+          <user-cinema-sessions-table
+            :sessions="showSessions"/>
         </div>
         <div class="col-10">
           <div class="mt-4 row justify-content-center">
@@ -47,15 +49,19 @@
 import Loader from '@/components/Loader'
 import UserSlider from '@/components/poster/UserSlider'
 import Module from '@/module/module'
+import UserCinemaSessionsTable from '@/components/cinema/UserCinemaSessionsTable'
 
 export default {
   components: {
-    Loader, UserSlider
+    Loader,
+    UserSlider,
+    UserCinemaSessionsTable
   },
   data () {
     return {
       loading: true,
-      hall: {}
+      hall: {},
+      sessions: []
     }
   },
   computed: {
@@ -65,6 +71,18 @@ export default {
         return this.hall.RU
       } else {
         return this.hall.UA
+      }
+    },
+    showSessions () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.sessions.filter(el => {
+          return el.hall.RU.name === this.showHall.name
+        })
+      } else {
+        return this.sessions.filter(el => {
+          return el.hall.UA.name === this.showHall.name
+        })
       }
     },
     imgsToShow () {
@@ -81,7 +99,7 @@ export default {
       console.log(selectHall)
     }
   },
-  mounted () {
+  async mounted () {
     if (Object.keys(this.$store.getters.hallInfo).length === 0) {
       const hall = JSON.parse(localStorage.getItem('lastHall'))
       this.$store.dispatch('addHallInfo', hall)
@@ -89,7 +107,7 @@ export default {
     } else {
       this.hall = this.$store.getters.hallInfo
     }
-    console.log(this.hall)
+    this.sessions = await Module.fetchInfo('Timetable')
     this.loading = false
   }
 }

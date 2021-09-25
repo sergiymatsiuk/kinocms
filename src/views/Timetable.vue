@@ -7,9 +7,10 @@
         @change-price="changePrice"
         @change-cinema="changeCinema"
         @change-film="changeFilm"
-        @change-date="changeDate"/>
+        @change-date="changeDate"
+        @change-hall="changeHall"/>
       <user-show
-        :sessions="filterByDate"/>
+        :sessions="filterByHall"/>
     </div>
   </div>
 </template>
@@ -33,7 +34,8 @@ export default {
       filterPrice: 0,
       filterCinema: '',
       filterFilm: '',
-      filterDate: ''
+      filterDate: '',
+      filterHall: ''
     }
   },
   computed: {
@@ -82,6 +84,22 @@ export default {
       return this.filterByFilm.filter(el => {
         return el.date.includes(this.filterDate)
       })
+    },
+    filterByHall () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.filterByDate.filter(el => {
+          if (el.hall.RU.name.includes(this.filterHall)) {
+            return el
+          }
+        })
+      } else {
+        return this.filterByDate.filter(el => {
+          if (el.hall.UA.name.includes(this.filterHall)) {
+            return el
+          }
+        })
+      }
     }
   },
   methods: {
@@ -90,12 +108,16 @@ export default {
     },
     changeCinema (cinema) {
       this.filterCinema = cinema
+      this.filterHalls = ''
     },
     changeFilm (film) {
       this.filterFilm = film
     },
     changeDate (date) {
       this.filterDate = date
+    },
+    changeHall (hall) {
+      this.filterHall = hall
     }
   },
   async mounted () {

@@ -52,6 +52,20 @@
           >{{item}}</option>
       </select>
     </div>
+    <div class="form-group col-3 text-center">
+      <label class="">{{ 'Hall' | localize}}</label>
+      <select
+        class="form-control"
+        :disabled="!filterCinema"
+        v-model="filterHall">
+        <option value=''></option>
+        <option
+          v-for="(item, idx) in selectHallsWithoutDuplicanes"
+          :key="idx"
+          :value="item"
+          >{{item}}</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -68,7 +82,8 @@ export default {
       filterPrice: 0,
       filterCinema: '',
       filterFilm: '',
-      filterDate: ''
+      filterDate: '',
+      filterHall: ''
     }
   },
   watch: {
@@ -77,12 +92,16 @@ export default {
     },
     filterCinema () {
       this.$emit('change-cinema', this.filterCinema)
+      this.filterHall = ''
     },
     filterFilm () {
       this.$emit('change-film', this.filterFilm)
     },
     filterDate () {
       this.$emit('change-date', this.filterDate)
+    },
+    filterHall () {
+      this.$emit('change-hall', this.filterHall)
     }
   },
   computed: {
@@ -121,6 +140,29 @@ export default {
         return this.cinemaLangSelect.indexOf(el) === pos
       })
     },
+    // HALL
+    selectHallsByCinema () {
+      return this.sessions.filter(el => {
+        return el.cinema.RU.name.includes(this.filterCinema) || el.cinema.UA.name.includes(this.filterCinema)
+      })
+    },
+    selectHallsByLang () {
+      const lang = this.$store.getters.info.locale
+      if (lang === 'rus-RUS') {
+        return this.selectHallsByCinema.map(el => {
+          return el.hall.RU.name
+        })
+      } else {
+        return this.selectHallsByCinema.map(el => {
+          return el.hall.UA.name
+        })
+      }
+    },
+    selectHallsWithoutDuplicanes () {
+      return this.selectHallsByLang.filter((el, pos) => {
+        return this.selectHallsByLang.indexOf(el) === pos
+      })
+    },
     // FILM
     filmLangSelect () {
       const lang = this.$store.getters.info.locale
@@ -155,6 +197,11 @@ export default {
       return res.sort((a, b) => {
         return Number.parseInt(a.split('-').join('')) - Number.parseInt(b.split('-').join(''))
       })
+    }
+  },
+  methods: {
+    show () {
+      console.log(this.selectHallsWithoutDuplicanes)
     }
   }
 }
