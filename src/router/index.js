@@ -23,6 +23,12 @@ const routes = [
     component: () => import('../views/Search.vue')
   },
   {
+    path: '/session/:id',
+    name: 'Session',
+    meta: { layout: 'user' },
+    component: () => import('../views/Session.vue')
+  },
+  {
     path: '/film-detaile/:id',
     name: 'FilmDetaile',
     meta: { layout: 'user' },

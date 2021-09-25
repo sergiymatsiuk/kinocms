@@ -106,5 +106,9 @@
   "WatchDetaile": "Подробнее",
   "NoFilms": "Фильмов не найдено ...",
   "Book": "Бронь",
-  "SoonSessions": "Ближайшие сеансы"
+  "SoonSessions": "Ближайшие сеансы",
+  "BookedTicket": "Забронировано: ",
+  "YourOrder": "Ваш заказ: ",
+  "Tickets": "Билетов: ",
+  "Sum": "Сумма: "
 }

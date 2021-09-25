@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     toBook (id) {
-      this.$router.push({ path: '/session-book/' + id })
+      this.$router.push({ path: '/session/' + id })
     }
   },
   mounted () {

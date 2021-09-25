@@ -253,5 +253,10 @@ export default {
     try {
       await firebase.database().ref(`Timetable/${id}`).remove()
     } catch (e) {}
+  },
+  async updateSession (id, item) {
+    try {
+      await firebase.database().ref(`Timetable/${id}`).set(item)
+    } catch (e) {}
   }, 
 }
