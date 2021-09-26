@@ -4,6 +4,7 @@ import Paginate from 'vuejs-paginate'
 import router from './router'
 import store from './store'
 import VueSplide from '@splidejs/vue-splide'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 import { firestorePlugin } from 'vuefire'
 import localizeFilter from '@/filters/localize.filter'
@@ -23,6 +24,12 @@ Vue.component('Paginate', Paginate)
 Vue.use(firestorePlugin)
 Vue.use(ToggleButton)
 Vue.use(VueSplide)
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCeanMqUeSGO6YaqeVPFVEvirT7PB906TI',
+    libraries: 'places'
+  }
+})
 Vue.filter('localize', localizeFilter)
 
 firebase.initializeApp({
